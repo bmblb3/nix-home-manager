@@ -141,9 +141,6 @@
       "histappend"
     ];
 
-    sessionVariables = {
-      PROMPT_COMMAND="history -a; history -c; history -r";
-    };
   };
 
   services.ssh-agent.enable = true;
