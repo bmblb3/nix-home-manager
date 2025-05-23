@@ -18,7 +18,7 @@
     # eza
     fd
     file
-    fzf
+    # fzf
     gawk
     gcc
     # git
@@ -94,6 +94,10 @@
   programs.zoxide = {
     enable = true; 
     options = ["--cmd cd"];
+  };
+
+  programs.fzf = {
+    enable = true;
   };
 
   programs.bash = {
