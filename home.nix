@@ -105,6 +105,9 @@
       cp = "cp -i";
       mv = "mv -i";
     };
+    initExtra = ''
+      set -o vi
+    '';
     shellOptions = [
       "autocd"
       "cdspell"
