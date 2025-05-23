@@ -135,6 +135,12 @@
       set -o vi
       set -o noclobber
       PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+      bind Space:magic-space
+      bind "set completion-ignore-case on"
+      bind "set completion-map-case on"
+      bind "set show-all-if-ambiguous on"
+      bind "set mark-symlinked-directories on"
     '';
 
     shellOptions = [
