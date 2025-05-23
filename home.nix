@@ -36,7 +36,7 @@
     libtool
     lsof
     ncdu
-    neovim
+    # neovim
     ninja
     nix-output-monitor
     nodejs_22
@@ -108,12 +108,17 @@
     enable = true;
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+  };
+
   programs.bash = {
     enable = true;
     enableCompletion = true;
 
     shellAliases = {
-      vi = "nvim";
       lg = "lazygit";
       cp = "cp -i";
       mv = "mv -i";
