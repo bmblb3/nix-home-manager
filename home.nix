@@ -111,6 +111,10 @@
     enable = true;
   };
 
+  programs.carapace = {
+    enable = true;
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
