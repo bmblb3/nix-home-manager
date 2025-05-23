@@ -89,6 +89,9 @@
   programs.eza = {
     enable = true; 
     git = true;
+    colors = "always";
+    icons = true;
+    extraOptions = [ "--group-directories-first" ];
   };
 
   programs.zoxide = {
