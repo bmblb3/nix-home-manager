@@ -101,6 +101,7 @@
     enableCompletion = true;
     shellAliases = {
       vi = "nvim";
+      lg = "lazygit";
     };
   };
 
