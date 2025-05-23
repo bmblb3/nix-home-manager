@@ -103,6 +103,17 @@
       vi = "nvim";
       lg = "lazygit";
     };
+    shellOptions = [
+      "autocd"
+      "cdspell"
+      "checkjobs"
+      "checkwinsize"
+      "cmdhist"
+      "dirspell"
+      "extglob"
+      "globstar"
+      "histappend"
+    ];
   };
 
   services.ssh-agent.enable = true;
