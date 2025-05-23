@@ -45,7 +45,7 @@
     python310
     quarto
     R
-    ripgrep
+    # ripgrep
     ripgrep-all
     rmlint
     rsync
@@ -97,6 +97,10 @@
   };
 
   programs.fzf = {
+    enable = true;
+  };
+
+  programs.ripgrep = {
     enable = true;
   };
 
