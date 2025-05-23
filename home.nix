@@ -114,6 +114,7 @@
     initExtra = ''
       set -o vi
       set -o noclobber
+      PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
     '';
 
     shellOptions = [
