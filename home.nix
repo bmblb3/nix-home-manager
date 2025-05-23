@@ -16,7 +16,7 @@
     docker-compose
     dos2unix
     # eza
-    fd
+    # fd
     file
     # fzf
     gawk
@@ -101,6 +101,10 @@
   };
 
   programs.ripgrep = {
+    enable = true;
+  };
+
+  programs.fd = {
     enable = true;
   };
 
