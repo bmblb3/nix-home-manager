@@ -90,7 +90,7 @@
     enable = true; 
     git = true;
     colors = "always";
-    icons = true;
+    icons = "auto";
     extraOptions = [ "--group-directories-first" ];
   };
 
