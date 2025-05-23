@@ -107,6 +107,7 @@
     };
     initExtra = ''
       set -o vi
+      set -o noclobber
     '';
     shellOptions = [
       "autocd"
