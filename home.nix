@@ -105,6 +105,12 @@
     };
   };
 
+  services.ssh-agent.enable = true;
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "4h";
+  };
+
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;
