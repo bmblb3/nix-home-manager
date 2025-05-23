@@ -102,6 +102,8 @@
     shellAliases = {
       vi = "nvim";
       lg = "lazygit";
+      cp = "cp -i";
+      mv = "mv -i";
     };
     shellOptions = [
       "autocd"
