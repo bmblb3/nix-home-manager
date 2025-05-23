@@ -79,7 +79,7 @@
   };
 
   programs.starship = {
-    enable = true; 
+    enable = true;
     settings = {
       username.show_always = true;
       hostname.ssh_only = false;
@@ -87,7 +87,7 @@
   };
 
   programs.eza = {
-    enable = true; 
+    enable = true;
     git = true;
     colors = "always";
     icons = "auto";
@@ -95,7 +95,7 @@
   };
 
   programs.zoxide = {
-    enable = true; 
+    enable = true;
     options = ["--cmd cd"];
   };
 
