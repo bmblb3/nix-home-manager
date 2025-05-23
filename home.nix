@@ -31,7 +31,7 @@
     hugo
     imagemagick
     jq
-    lazygit
+    # lazygit
     libevent
     libtool
     lsof
@@ -119,6 +119,10 @@
     enable = true;
     defaultEditor = true;
     viAlias = true;
+  };
+
+  programs.lazygit = {
+    enable = true;
   };
 
   programs.bash = {
