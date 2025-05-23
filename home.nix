@@ -99,16 +99,23 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+
     shellAliases = {
       vi = "nvim";
       lg = "lazygit";
       cp = "cp -i";
       mv = "mv -i";
     };
+
+    historySize     =  100000;
+    historyFileSize = 1000000;
+    historyControl  = [ "ignoreboth" "erasedups" ];
+
     initExtra = ''
       set -o vi
       set -o noclobber
     '';
+
     shellOptions = [
       "autocd"
       "cdspell"
@@ -120,6 +127,10 @@
       "globstar"
       "histappend"
     ];
+
+    sessionVariables = {
+      PROMPT_COMMAND="history -a; history -c; history -r";
+    };
   };
 
   services.ssh-agent.enable = true;
