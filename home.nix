@@ -1,6 +1,7 @@
-{ config, pkgs, username, ... }:
+{ config, pkgs, username, nixvim, ... }:
 
 {
+  imports = [ nixvim.homeManagerModules.nixvim ];
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -12,16 +13,16 @@
     clang-tools
     cmake
     curl
-    # direnv
+    # direnv (added as program integration)
     docker-compose
     dos2unix
-    # eza
-    # fd
+    # eza (added as program integration)
+    # fd (added as program integration)
     file
-    # fzf
+    # fzf (added as program integration)
     gawk
     gcc
-    # git
+    # git (added as program integration)
     git-filter-repo
     glow
     gnumake
@@ -31,12 +32,12 @@
     hugo
     imagemagick
     jq
-    # lazygit
+    # lazygit (added as program integration)
     libevent
     libtool
     lsof
     ncdu
-    # neovim
+    # neovim (added as nixvim program integration)
     ninja
     nix-output-monitor
     nodejs_22
@@ -45,14 +46,14 @@
     python310
     quarto
     R
-    # ripgrep
+    # ripgrep (added as program integration)
     ripgrep-all
     rmlint
     rsync
     rustc
     sqlite
     sqlitebrowser
-    # starship
+    # starship (added as program integration)
     sysstat
     tealdeer
     typst
@@ -68,7 +69,7 @@
     zellij
     zig
     zip
-    # zoxide
+    # zoxide (added as program integration)
     zstd
   ];
 
@@ -115,12 +116,6 @@
     enable = true;
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-  };
-
   programs.lazygit = {
     enable = true;
   };
@@ -128,6 +123,12 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+
+  programs.nixvim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
   };
 
   programs.bash = {

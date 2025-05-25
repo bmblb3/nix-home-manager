@@ -8,9 +8,12 @@
 
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixvim.url = "github:nix-community/nixvim/nixos-24.11";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, nixvim, ... }@inputs: {
     nixosConfigurations = {
 
       wsl-work = nixpkgs.lib.nixosSystem {
@@ -23,7 +26,10 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.akucwh = ./home.nix;
-            home-manager.extraSpecialArgs = { username = "akucwh"; };
+            home-manager.extraSpecialArgs = {
+              username = "akucwh";
+              inherit nixvim;
+            };
           }
 
         ];
