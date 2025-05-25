@@ -16,7 +16,7 @@
         action = "<cmd>LazyGit<CR>";
         options = {
           silent = true;
-          desc = "Launch lazygit";
+          desc = "[G]it: Launch lazy[g]it";
         };
       }
     ];
