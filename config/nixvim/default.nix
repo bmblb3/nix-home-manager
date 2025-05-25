@@ -3,6 +3,7 @@
 {
   imports = [
     ./lazygit.nix
+    ./copilot.nix
   ];
 
   programs.nixvim = {
@@ -12,19 +13,14 @@
 
     colorschemes.catppuccin.enable = true;
 
-    plugins = {
-      lualine.enable = true;
-
-      copilot-lua.enable = true;
-      copilot-chat.enable = true;
-
-      which-key.enable = true;
-
-    };
-
     globals.mapleader = " ";
     globals.maplocalleader = " ";
     keymaps = [ ];
+
+    plugins = {
+      lualine.enable = true;
+      which-key.enable = true;
+    };
 
   };
 }
