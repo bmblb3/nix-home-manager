@@ -136,6 +136,9 @@
 
       copilot-lua.enable = true;
       copilot-chat.enable = true;
+
+      which-key.enable = true;
+
     };
     globals.mapleader = " ";
     globals.maplocalleader = " ";
