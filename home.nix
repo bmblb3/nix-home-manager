@@ -3,7 +3,7 @@
 {
   imports = [
     nixvim.homeManagerModules.nixvim 
-    ./config/nixvim.nix
+    ./config/nixvim
   ];
 
   home.username = username;
