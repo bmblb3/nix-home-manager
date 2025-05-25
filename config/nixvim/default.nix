@@ -14,7 +14,7 @@
     colorschemes.catppuccin.enable = true;
 
     globals.mapleader = " ";
-    globals.maplocalleader = " ";
+    globals.maplocalleader = ",";
     keymaps = [ ];
 
     plugins = {
