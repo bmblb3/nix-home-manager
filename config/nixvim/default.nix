@@ -4,6 +4,7 @@
   imports = [
     ./lazygit.nix
     ./copilot.nix
+    ./lsp.nix
   ];
 
   programs.nixvim = {
