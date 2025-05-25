@@ -137,6 +137,8 @@
       copilot-lua.enable = true;
       copilot-chat.enable = true;
     };
+    globals.mapleader = " ";
+    globals.maplocalleader = " ";
   };
 
   programs.bash = {
