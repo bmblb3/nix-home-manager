@@ -20,6 +20,7 @@
     opts = {
       autowrite = true;
       completeopt = "menu,menuone,noselect";
+      confirm = true;
       cursorline = true;
       expandtab = true;
       fillchars = {
