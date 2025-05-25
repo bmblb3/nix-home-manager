@@ -134,6 +134,9 @@
 
     plugins = {
       lualine.enable = true;
+
+      copilot-lua.enable = true;
+      copilot-chat.enable = true;
     };
   };
 
