@@ -129,6 +129,8 @@
     enable = true;
     defaultEditor = true;
     viAlias = true;
+
+    colorschemes.catppuccin.enable = true;
   };
 
   programs.bash = {
