@@ -60,7 +60,6 @@
     unzip
     uv
     vifm
-    vim
     watchexec
     wget
     xclip
