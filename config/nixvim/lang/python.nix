@@ -6,7 +6,10 @@
 
     lsp.servers.ruff = {
       enable = true;
-      settings.cmd = [ "ruff" "server" ];
+      settings = {
+        cmd = [ "ruff" "server" ];
+        filetypes = [ "python" ];
+      };
     };
 
   };
