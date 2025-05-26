@@ -2,10 +2,11 @@
 
 {
   imports = [
-    ./lazygit.nix
     ./copilot.nix
-    ./lsp.nix
+    ./lang/nix.nix
     ./lang/python.nix
+    ./lazygit.nix
+    ./lsp.nix
   ];
 
   programs.nixvim = {
