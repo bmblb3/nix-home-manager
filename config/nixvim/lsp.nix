@@ -4,6 +4,8 @@
 
   programs.nixvim = {
 
+    plugins.lspconfig.enable = true;
+
     keymaps = [
       {
         key = "<leader>lf";

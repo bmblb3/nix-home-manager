@@ -1,16 +1,7 @@
 { pkgs, ... } :
 
 {
-
   programs.nixvim = {
-
-    lsp.servers.nil_ls = {
-      enable = true;
-      settings = {
-        cmd = [ "nil" ];
-        filetypes = [ "nix" ];
-      };
-    };
-
+    lsp.servers.nil_ls.enable = true;
   };
 }
