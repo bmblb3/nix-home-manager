@@ -5,6 +5,7 @@
     ./lazygit.nix
     ./copilot.nix
     ./lsp.nix
+    ./lang/python.nix
   ];
 
   programs.nixvim = {
