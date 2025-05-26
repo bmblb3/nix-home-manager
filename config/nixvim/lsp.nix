@@ -7,7 +7,7 @@
     keymaps = [
       {
         key = "<leader>lf";
-        action = "<cmd>lua vim.lsp.buf.format()<CR>";
+        action.__raw = "vim.lsp.buf.format";
         options = {
           silent = true;
           desc = "[L]sp: [F]ormat";
