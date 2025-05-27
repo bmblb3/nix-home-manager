@@ -9,6 +9,7 @@
     ./lazygit.nix
     ./lsp.nix
     ./misc_plugins.nix
+    ./treesitter.nix
   ];
 
   programs.nixvim = {
