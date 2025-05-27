@@ -11,6 +11,7 @@
         enable = true;
         modules = {
           pairs = { };
+          ai = { };
         };
       };
     };
