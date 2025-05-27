@@ -14,6 +14,8 @@
           ai = { };
         };
       };
+
+      flash.enable = true;
     };
   };
 }
