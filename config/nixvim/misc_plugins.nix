@@ -6,6 +6,13 @@
 
     plugins = {
       ts-comments.enable = true;
+
+      mini = {
+        enable = true;
+        modules = {
+          pairs = { };
+        };
+      };
     };
   };
 }
