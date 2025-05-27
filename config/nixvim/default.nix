@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./cmp.nix
     ./copilot.nix
     ./lang/nix.nix
     ./lang/python.nix
