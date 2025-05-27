@@ -13,34 +13,43 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, nixvim, ... }@inputs: {
-    nixosConfigurations = {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixos-wsl,
+      home-manager,
+      nixvim,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations = {
 
-      wsl-work = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ 
-          ./configuration_wsl.nix 
+        wsl-work = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configuration_wsl.nix
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.akucwh = ./home.nix;
-            home-manager.extraSpecialArgs = {
-              username = "akucwh";
-              inherit nixvim;
-            };
-          }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.akucwh = ./home.nix;
+              home-manager.extraSpecialArgs = {
+                username = "akucwh";
+                inherit nixvim;
+              };
+            }
 
-        ];
-        specialArgs = { 
-          inherit nixos-wsl; 
-          hostname = "wsl-work";
-          username = "akucwh";
+          ];
+          specialArgs = {
+            inherit nixos-wsl;
+            hostname = "wsl-work";
+            username = "akucwh";
+          };
         };
-      };
 
+      };
     };
-  };
 
 }

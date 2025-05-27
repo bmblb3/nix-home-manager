@@ -4,7 +4,15 @@
 # Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, nixos-wsl, hostname, username, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  nixos-wsl,
+  hostname,
+  username,
+  ...
+}:
 
 {
 
@@ -27,7 +35,10 @@
 
   wsl.wslConf.network.hostname = hostname;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   environment.systemPackages = with pkgs; [
     git
@@ -35,7 +46,7 @@
     wget
     curl
   ];
-  
+
   environment.variables.EDITOR = "vim";
 
 }

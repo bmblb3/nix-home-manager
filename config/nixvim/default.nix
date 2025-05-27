@@ -1,4 +1,4 @@
-{ pkgs, ... } :
+{ pkgs, ... }:
 
 {
   imports = [
@@ -48,7 +48,16 @@
       relativenumber = true;
       ruler = false;
       scrolloff = 4;
-      sessionoptions = [ "buffers" "curdir" "tabpages" "winsize" "help" "globals" "skiprtp" "folds" ];
+      sessionoptions = [
+        "buffers"
+        "curdir"
+        "tabpages"
+        "winsize"
+        "help"
+        "globals"
+        "skiprtp"
+        "folds"
+      ];
       shiftround = true;
       shiftwidth = 2;
       shortmess = "ltToOcCFWI";

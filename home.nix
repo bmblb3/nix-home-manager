@@ -1,8 +1,14 @@
-{ config, pkgs, username, nixvim, ... }:
+{
+  config,
+  pkgs,
+  username,
+  nixvim,
+  ...
+}:
 
 {
   imports = [
-    nixvim.homeManagerModules.nixvim 
+    nixvim.homeManagerModules.nixvim
     ./config/nixvim
   ];
 
@@ -99,7 +105,7 @@
 
   programs.zoxide = {
     enable = true;
-    options = ["--cmd cd"];
+    options = [ "--cmd cd" ];
   };
 
   programs.fzf = {
@@ -137,9 +143,12 @@
       mv = "mv -i";
     };
 
-    historySize     =  100000;
+    historySize = 100000;
     historyFileSize = 1000000;
-    historyControl  = [ "ignoreboth" "erasedups" ];
+    historyControl = [
+      "ignoreboth"
+      "erasedups"
+    ];
 
     initExtra = ''
       set -o vi
