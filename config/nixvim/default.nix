@@ -7,6 +7,7 @@
     ./lang/python.nix
     ./lazygit.nix
     ./lsp.nix
+    ./misc_plugins.nix
   ];
 
   programs.nixvim = {
