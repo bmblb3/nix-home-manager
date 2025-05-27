@@ -5,8 +5,9 @@
   programs.nixvim = {
 
     extraPackages = with pkgs; [
-      ruff
       nixfmt-rfc-style
+      ruff
+      ty
     ];
 
     plugins.lspconfig.enable = true;
