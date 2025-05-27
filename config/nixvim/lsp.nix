@@ -4,12 +4,6 @@
 
   programs.nixvim = {
 
-    extraPackages = with pkgs; [
-      nixfmt-rfc-style
-      ruff
-      ty
-    ];
-
     plugins.lspconfig.enable = true;
 
     plugins.conform-nvim = {
@@ -25,11 +19,6 @@
         };
         notify_on_error = true;
         notify_no_formatters = true;
-
-        formatters_by_ft = {
-          python = [ "ruff_format" ];
-          nix = [ "nixfmt" ];
-        };
       };
     };
 
@@ -43,6 +32,5 @@
         };
       }
     ];
-
   };
 }
