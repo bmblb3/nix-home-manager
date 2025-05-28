@@ -75,7 +75,7 @@
       {
         mode = [ "c" ];
         key = "<c-s>";
-        action = "<cmd>lua require('flash').togglt()<CR>";
+        action = "<cmd>lua require('flash').toggle()<CR>";
         options = {
           silent = true;
           desc = "Flash: Treesitter toggle";
