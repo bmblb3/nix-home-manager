@@ -44,6 +44,7 @@
     # lazygit (added as program integration)
     libevent
     libtool
+    moreutils
     lsof
     ncdu
     # neovim (added as nixvim program integration)
