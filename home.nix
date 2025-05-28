@@ -69,7 +69,6 @@
     tealdeer
     typst
     unzip
-    uv
     vifm
     watchexec
     wget
