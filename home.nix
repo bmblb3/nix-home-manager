@@ -22,6 +22,7 @@
     clang-tools
     cmake
     curl
+    devenv
     # direnv (added as program integration)
     docker-compose
     dos2unix
