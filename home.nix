@@ -75,7 +75,7 @@
     xclip
     xz
     yq-go
-    zellij
+    # zellij (added as program integration)
     zig
     zip
     # zoxide (added as program integration)
@@ -175,6 +175,16 @@
       "histappend"
     ];
 
+  };
+
+  programs.zellij = {
+    enable = true;
+    settings = {
+      theme = "tokyo-night";
+      default_mode = "locked";
+      pane_frames = false;
+      show_startup_tips = false;
+    };
   };
 
   services.ssh-agent.enable = true;
