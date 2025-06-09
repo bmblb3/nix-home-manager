@@ -28,7 +28,15 @@
         wsl-work = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+
             ./configuration_wsl.nix
+
+            {
+              nix.settings.trusted-users = [
+                "root"
+                "akucwh"
+              ];
+            }
 
             home-manager.nixosModules.home-manager
             {
