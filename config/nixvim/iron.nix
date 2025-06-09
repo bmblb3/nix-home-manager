@@ -9,10 +9,6 @@
 
       settings = {
 
-        scratch_repl = true;
-
-        highlight_last = "IronLastSent";
-
         keymaps = {
           restart_repl = "<leader>rs";
 
@@ -25,31 +21,40 @@
           send_code_block_and_move = "<leader>rr";
         };
 
-        repl_definition = {
+        ignore_blank_lines = true;
 
-          python = {
-            command = [
-              "ipython"
-              "--no-autoindent"
-            ];
-            format = {
-              __raw = "require('iron.fts.common').bracketed_paste";
+        config = {
+
+          highlight_last = "IronLastSent";
+
+          repl_definition = {
+
+            python = {
+              command = [
+                "ipython"
+                "--no-autoindent"
+              ];
+              format = {
+                __raw = "require('iron.fts.common').bracketed_paste";
+              };
+              block_dividers = [
+                "# %%"
+                "#%%"
+              ];
             };
-            block_dividers = [
-              "# %%"
-              "#%%"
-            ];
+
+            sh = {
+              command = [
+                "bash"
+              ];
+            };
           };
 
-          sh = {
-            command = [
-              "bash"
-            ];
+          repl_open_cmd = {
+            __raw = "require(\"iron.view\").split.vertical.belowright(0.4)";
           };
-        };
 
-        repl_open_cmd = {
-          __raw = "require(\"iron.view\").split.vertical.belowright(0.4)";
+          scratch_repl = true;
         };
       };
     };
