@@ -4,6 +4,7 @@
   imports = [
     ./cmp.nix
     ./copilot.nix
+    ./iron.nix
     ./lang/nix.nix
     ./lang/python.nix
     ./lazygit.nix
