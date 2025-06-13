@@ -36,6 +36,7 @@
                 "root"
                 "akucwh"
               ];
+              users.users.akucwh.extraGroups = [ "docker" ];
             }
 
             home-manager.nixosModules.home-manager

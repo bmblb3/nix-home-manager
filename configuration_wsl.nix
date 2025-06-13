@@ -50,4 +50,7 @@
 
   environment.variables.EDITOR = "vim";
 
+  virtualisation.docker = {
+    enable = true;
+  };
 }
