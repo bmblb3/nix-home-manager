@@ -11,6 +11,9 @@
 
     nixvim.url = "github:nix-community/nixvim/nixos-25.05";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -55,6 +58,39 @@
             inherit nixos-wsl;
             hostname = "wsl-work";
             username = "akucwh";
+          };
+        };
+
+        hetzner = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+
+            ./configuration_hetzner.nix
+            inputs.disko.nixosModules.disko
+
+            {
+              nix.settings.trusted-users = [
+                "root"
+                "bmblb3"
+              ];
+              users.users.bmblb3.extraGroups = [ "docker" ];
+            }
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.bmblb3 = ./home.nix;
+              home-manager.extraSpecialArgs = {
+                username = "bmblb3";
+                inherit nixvim;
+              };
+            }
+
+          ];
+          specialArgs = {
+            hostname = "hetzner";
+            username = "bmblb3";
           };
         };
 
