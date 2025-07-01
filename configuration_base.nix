@@ -37,9 +37,7 @@
 
   environment.variables.EDITOR = "vim";
 
-  virtualisation.docker = {
-    enable = true;
-  };
+  virtualisation.docker.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 }
