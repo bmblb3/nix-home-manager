@@ -68,6 +68,7 @@
     sysstat
     tealdeer
     typst
+    typstyle
     unzip
     vifm
     watchexec
