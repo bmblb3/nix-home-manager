@@ -18,6 +18,7 @@
 
   imports = [
     nixos-wsl.nixosModules.default
+    ./configuration_base.nix
   ];
 
   # This value determines the NixOS release from which the default
@@ -35,38 +36,6 @@
     defaultUser = username;
     wslConf.network.hostname = hostname;
   };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-    curl
-  ];
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    proggyfonts
-    google-fonts
-  ];
-
-  environment.variables.EDITOR = "vim";
-
-  virtualisation.docker = {
-    enable = true;
-  };
-
-  nixpkgs.config.allowUnfree = true;
 
   # Enable GPU support
   services.xserver.videoDrivers = [ "nvidia" ];
