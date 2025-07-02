@@ -73,7 +73,11 @@
                 "root"
                 "bmblb3"
               ];
-              users.users.bmblb3.extraGroups = [ "docker" ];
+              users.users.bmblb3.extraGroups = [
+                "docker"
+                "wheel"
+              ];
+              users.users.bmblb3.isNormalUser = true;
             }
 
             home-manager.nixosModules.home-manager

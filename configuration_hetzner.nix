@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  hostname,
   ...
 }:
 
@@ -29,4 +30,6 @@
   };
 
   services.cron.enable = true;
+
+  networking.hostName = hostname;
 }
