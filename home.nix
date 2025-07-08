@@ -180,11 +180,15 @@
 
   programs.zellij = {
     enable = true;
+    enableBashIntegration = true;
+    attachExistingSession = true;
+    exitShellOnExit = true;
     settings = {
       theme = "tokyo-night";
       default_mode = "locked";
       pane_frames = false;
       show_startup_tips = false;
+      ui.pane_frames.hide_session_name = true;
     };
   };
 
