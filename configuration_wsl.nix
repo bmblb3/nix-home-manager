@@ -70,4 +70,8 @@
     daemon.settings.features.cdi = true;
     daemon.settings.cdi-spec-dirs = [ "/etc/cdi" ];
   };
+  boot.tmp = {
+    useTmpfs = true;
+    tmpfsSize = "50%";
+  };
 }
