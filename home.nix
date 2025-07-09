@@ -192,6 +192,14 @@
     };
   };
 
+  programs.visidata = {
+    enable = true;
+    visidatarc = ''
+      options.clipboard_copy_cmd='xclip -selection clipboard -filter'
+      options.clipboard_paste_cmd='xclip -selection clipboard -o'
+    '';
+  };
+
   services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
