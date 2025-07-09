@@ -87,6 +87,9 @@
     enable = true;
     userName = "Akshay Kumar";
     userEmail = "132216831+bmblb3@users.noreply.github.com";
+    extraConfig = {
+      credential.helper = "store";
+    };
   };
 
   programs.starship = {
