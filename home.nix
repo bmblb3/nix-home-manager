@@ -183,9 +183,6 @@
 
   programs.zellij = {
     enable = true;
-    enableBashIntegration = true;
-    attachExistingSession = true;
-    exitShellOnExit = true;
     settings = {
       theme = "tokyo-night";
       default_mode = "locked";
