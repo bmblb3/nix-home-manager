@@ -54,6 +54,7 @@
     nodejs_22
     p7zip
     pandoc
+    postgresql
     python310
     quarto
     R
@@ -200,6 +201,8 @@
       options.clipboard_paste_cmd='xclip -selection clipboard -o'
     '';
   };
+
+  programs.pgcli.enable = true;
 
   services.ssh-agent.enable = true;
   programs.ssh = {
