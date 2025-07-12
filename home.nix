@@ -63,6 +63,7 @@
     rmlint
     rsync
     rustc
+    sqlcheck
     sqlite
     sqlitebrowser
     # starship (added as program integration)
