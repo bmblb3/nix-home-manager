@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+sed -E "s/([^[:space:]])[[:space:]]+/\\1 /g" \
+  | sed "s/[[:space:]]*)/ )/g" \
+  | sed "s/([[:space:]]*/( /g" \
+  | sed "s/[[:space:]]*,[[:space:]]*/ , /g" \
+  | column -t -s"(" -o"(" \
+  | column -t -s, -o, \
+  | column -t -s")" -o")" \
+  | sed -E "s/[[:space:]]+$//g" \
+  | sed "s/[[:space:]]*,$/,/g" \
+  | sed -E "s/([^\)]),$/\\1/g"

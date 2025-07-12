@@ -205,6 +205,17 @@
 
   programs.pgcli.enable = true;
 
+  home.file = {
+    ".local/bin" = {
+      source = ./scripts;
+      recursive = true;
+    };
+  };
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
