@@ -37,7 +37,7 @@ text = sys.stdin.read()
 
 text, protected = protect_strings(text)
 
-text = re.sub(r"([^ ]) +", r"\1 ", text)  # squeeze all except leading spaces
+text = re.sub(r"([^ \n]) +", r"\1 ", text)  # squeeze all except leading spaces
 text = re.sub(r" *\)", " )", text)  # squeeze/expand so that ) always follows one space
 text = re.sub(r"\( *", "( ", text)  # squeeze/expand so that one space always follows (
 text = re.sub(r" *, *", " , ", text)  # squeeze/expand so one space always surrounds ,
