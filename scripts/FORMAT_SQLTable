@@ -1,12 +1,59 @@
-#!/usr/bin/env bash
+#! /usr/bin/env nix-shell
+#! nix-shell -i python3 -p python3
+import sys
+import re
+import subprocess
 
-sed -E "s/([^[:space:]])[[:space:]]+/\\1 /g" \
-  | sed "s/[[:space:]]*)/ )/g" \
-  | sed "s/([[:space:]]*/( /g" \
-  | sed "s/[[:space:]]*,[[:space:]]*/ , /g" \
-  | column -t -s"(" -o"(" \
-  | column -t -s, -o, \
-  | column -t -s")" -o")" \
-  | sed -E "s/[[:space:]]+$//g" \
-  | sed "s/[[:space:]]*,$/,/g" \
-  | sed -E "s/([^\)]),$/\\1/g"
+
+def run_column(text, sep, output_sep):
+    proc = subprocess.run(
+        ["column", "-t", f"-s{sep}", f"-o{output_sep}"],
+        input=text,
+        text=True,
+        capture_output=True,
+    )
+    return proc.stdout
+
+
+def protect_strings(text):
+    parts = []
+
+    def replacer(match):
+        original = match.group()
+        parts.append(original)
+        return "X" * len(original)
+
+    return re.sub(r"'[^']*'", replacer, text), parts
+
+
+def restore_strings(text, parts):
+    for i, part in enumerate(parts):
+        placeholder = "X" * len(part)
+        text = text.replace(placeholder, part, 1)
+    return text
+
+
+text = sys.stdin.read()
+
+text, protected = protect_strings(text)
+
+text = re.sub(r"([^ ]) +", r"\1 ", text)  # squeeze all except leading spaces
+text = re.sub(r" *\)", " )", text)  # squeeze/expand so that ) always follows one space
+text = re.sub(r"\( *", "( ", text)  # squeeze/expand so that one space always follows (
+text = re.sub(r" *, *", " , ", text)  # squeeze/expand so one space always surrounds ,
+
+text = run_column(text, "(", "(")
+text = run_column(text, ",", ",")
+text = run_column(text, ")", ")")
+
+text = re.sub(r" +$", "", text, flags=re.MULTILINE)  # remove any trailing space
+text = re.sub(
+    r" *,$", ",", text, flags=re.MULTILINE
+)  # remove leading space for a comma at end of line
+text = re.sub(
+    r"([^\)]), *$", r"\1", text, flags=re.MULTILINE
+)  # remove comma at end of line if not preceeded by )
+
+text = restore_strings(text, protected)
+
+print(text, end="")
