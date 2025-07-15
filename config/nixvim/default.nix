@@ -7,6 +7,7 @@
     ./iron.nix
     ./lang/nix.nix
     ./lang/python.nix
+    ./lang/html.nix
     ./lazygit.nix
     ./lsp.nix
     ./misc_plugins.nix
