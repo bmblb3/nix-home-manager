@@ -93,6 +93,7 @@
       credential.helper = "store";
       init.defaultBranch = "main";
     };
+    delta.enable = true;
   };
 
   programs.starship = {
