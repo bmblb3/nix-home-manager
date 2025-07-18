@@ -25,7 +25,7 @@
     keymaps = [
       {
         key = "<leader>lf";
-        action = "<cmd>require('conform').format(lsp_format = 'fallback')<CR>";
+        action = "<cmd>lua require('conform').format({lsp_format='fallback', timeout_ms=2000})<CR>";
         options = {
           silent = true;
           desc = "[L]sp: [F]ormat";
