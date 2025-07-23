@@ -220,7 +220,7 @@
   services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "4h";
+    addKeysToAgent = "12h";
   };
 
   home.stateVersion = "25.05";
