@@ -3,6 +3,7 @@
   lib,
   pkgs,
   hostname,
+  username,
   ...
 }:
 
@@ -29,7 +30,27 @@
     settings.X11Forwarding = true;
   };
 
-  services.cron.enable = true;
+  systemd.timers."shbackup" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 01:00:00";
+      Persistent = true;
+      Unit = "shbackup.service";
+    };
+  };
+  systemd.services."shbackup" = {
+    path = with pkgs; [
+      bash
+      (python3.withPackages (ps: [ ps.python-dotenv ]))
+      gnutar
+      restic
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = username;
+      ExecStart = "/home/${username}/self_hosted/backup";
+    };
+  };
 
   networking.hostName = hostname;
 }
