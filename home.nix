@@ -19,6 +19,7 @@
     bat
     btop
     cargo
+    cht-sh
     clang-tools
     cmake
     curl
