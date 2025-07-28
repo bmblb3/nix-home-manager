@@ -142,47 +142,30 @@
     nix-direnv.enable = true;
   };
 
-  programs.bash = {
+  programs.fish = {
     enable = true;
-    enableCompletion = true;
 
-    shellAliases = {
+    shellAbbrs = {
       lg = "lazygit";
       cp = "cp -i";
       mv = "mv -i";
     };
 
-    historySize = 100000;
-    historyFileSize = 1000000;
-    historyControl = [
-      "ignoreboth"
-      "erasedups"
-    ];
+    functions = {
+      fish_greeting = "";
+    };
+  };
+
+  programs.bash = {
+    enable = true;
 
     initExtra = ''
-      set -o vi
-      set -o noclobber
-      PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
-      bind Space:magic-space
-      bind "set completion-ignore-case on"
-      bind "set completion-map-case on"
-      bind "set show-all-if-ambiguous on"
-      bind "set mark-symlinked-directories on"
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
     '';
-
-    shellOptions = [
-      "autocd"
-      "cdspell"
-      "checkjobs"
-      "checkwinsize"
-      "cmdhist"
-      "dirspell"
-      "extglob"
-      "globstar"
-      "histappend"
-    ];
-
   };
 
   programs.zellij = {
