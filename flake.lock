@@ -80,11 +80,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754065213,
-        "narHash": "sha256-v2jpSWtrtdukXnOBhzTYGWE8b4TnMhEW0vmld4vht0w=",
+        "lastModified": 1754068681,
+        "narHash": "sha256-J0Ll2Ozx+DEPA+6nzq3zA3mw20tg5Irgv13TAiMU7K0=",
         "owner": "bmblb3",
         "repo": "nvim_from_nixCats",
-        "rev": "eb8d417db111059405ec0e71715d9ebe90963371",
+        "rev": "8e6755e4d4f238aeefb02a3f0119895ab2e77488",
         "type": "github"
       },
       "original": {
