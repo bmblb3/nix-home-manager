@@ -2,18 +2,18 @@
   config,
   pkgs,
   username,
-  nixvim,
+  nixCats-nvim,
   ...
 }:
 
 {
-  imports = [
-    nixvim.homeManagerModules.nixvim
-    ./config/nixvim
-  ];
-
   home.username = username;
   home.homeDirectory = "/home/${username}";
+
+  imports = [
+    nixCats-nvim.homeModules.default
+  ];
+  nvim.enable = true;
 
   home.packages = with pkgs; [
     bat
@@ -49,7 +49,7 @@
     moreutils
     lsof
     ncdu
-    # neovim (added as nixvim program integration)
+    # neovim (added as nixCats module)
     ninja
     nix-output-monitor
     nodejs_22

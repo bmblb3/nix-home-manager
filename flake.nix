@@ -9,11 +9,11 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixvim.url = "github:nix-community/nixvim/nixos-25.05";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
-
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixCats-nvim.url = "github:bmblb3/nvim_from_nixCats";
+    nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -22,7 +22,7 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
-      nixvim,
+      nixCats-nvim,
       ...
     }@inputs:
     {
@@ -49,7 +49,7 @@
               home-manager.users.akucwh = ./home.nix;
               home-manager.extraSpecialArgs = {
                 username = "akucwh";
-                inherit nixvim;
+                inherit nixCats-nvim;
               };
             }
 
@@ -87,7 +87,7 @@
               home-manager.users.bmblb3 = ./home.nix;
               home-manager.extraSpecialArgs = {
                 username = "bmblb3";
-                inherit nixvim;
+                inherit nixCats-nvim;
               };
             }
 
