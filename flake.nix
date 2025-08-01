@@ -12,7 +12,7 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixCats-nvim.url = "github:bmblb3/nvim_from_nixCats";
+    nixCats-nvim.url = "path:./nvim";
     nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 

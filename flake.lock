@@ -80,18 +80,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1754068681,
-        "narHash": "sha256-J0Ll2Ozx+DEPA+6nzq3zA3mw20tg5Irgv13TAiMU7K0=",
-        "owner": "bmblb3",
-        "repo": "nvim_from_nixCats",
-        "rev": "8e6755e4d4f238aeefb02a3f0119895ab2e77488",
-        "type": "github"
+        "path": "./nvim",
+        "type": "path"
       },
       "original": {
-        "owner": "bmblb3",
-        "repo": "nvim_from_nixCats",
-        "type": "github"
-      }
+        "path": "./nvim",
+        "type": "path"
+      },
+      "parent": []
     },
     "nixos-wsl": {
       "inputs": {
