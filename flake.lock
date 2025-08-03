@@ -80,14 +80,19 @@
         ]
       },
       "locked": {
-        "path": "nvim",
-        "type": "path"
+        "lastModified": 1754228539,
+        "narHash": "sha256-gFsCR/TiwMg9D0p4/zGSsS6lKFKSRb1J97OV/0JNBeE=",
+        "ref": "main",
+        "rev": "49777a72a733a2082596f7df5d00669dddb850d2",
+        "revCount": 10,
+        "type": "git",
+        "url": "ssh://git@github.com/bmblb3/nvim_nixcats.git"
       },
       "original": {
-        "path": "nvim",
-        "type": "path"
-      },
-      "parent": []
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@github.com/bmblb3/nvim_nixcats.git"
+      }
     },
     "nixos-wsl": {
       "inputs": {
