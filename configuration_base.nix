@@ -20,6 +20,7 @@
     vim
     wget
     curl
+    home-manager
   ];
 
   fonts.packages = with pkgs; [
