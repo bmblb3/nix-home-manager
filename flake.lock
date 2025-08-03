@@ -80,18 +80,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1754225551,
-        "narHash": "sha256-YSyRGLSNDWpQkpoAo6rNV8GsoILRYP1JiSkwFGkBoHc=",
-        "ref": "refs/heads/main",
-        "rev": "2bcd2233a98e09088f6d90c2b0f2d17ee5ba79e8",
-        "revCount": 7,
-        "type": "git",
-        "url": "file:./nvim"
+        "path": "nvim",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "file:./nvim"
-      }
+        "path": "nvim",
+        "type": "path"
+      },
+      "parent": []
     },
     "nixos-wsl": {
       "inputs": {
