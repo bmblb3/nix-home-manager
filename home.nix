@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   username,
   nixCats-nvim,
   ...
@@ -177,21 +178,6 @@
       pane_frames = false;
       show_startup_tips = false;
       ui.pane_frames.hide_session_name = true;
-      keybinds._children = [
-        {
-          shared_except = {
-            _args = [ "locked" ];
-            _children = [
-              {
-                bind = {
-                  _args = [ "Alt ö" ];
-                  PreviousSwapLayout = { };
-                };
-              }
-            ];
-          };
-        }
-      ];
     };
   };
 
