@@ -1,3 +1,0 @@
-[submodule "nvim"]
-	path = nvim
-	url = git@github.com:bmblb3/nvim_nixcats.git
