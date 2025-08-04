@@ -172,14 +172,24 @@
 
   programs.zellij = {
     enable = true;
-    settings = {
-      theme = "tokyo-night";
-      default_mode = "locked";
-      pane_frames = false;
-      show_startup_tips = false;
-      ui.pane_frames.hide_session_name = true;
-    };
   };
+  xdg.configFile."zellij/config.kdl".text = ''
+    theme "tokyo-night"
+    default_mode "locked"
+    pane_frames false
+    show_startup_tips false
+    ui {
+      pane_frames {
+        hide_session_name true
+      }
+    }
+    keybinds {
+      shared_except "locked" {
+        bind "Alt ö" { PreviousSwapLayout; }
+        bind "Alt ä" { NextSwapLayout; }
+      }
+    }
+  '';
 
   programs.visidata = {
     enable = true;
