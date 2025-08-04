@@ -40,6 +40,7 @@ Usage: ${0##*/} [OPTION] [-- application ...]
 options:
   -c                Shell commands read from the first non-option argument
   -data=DIR         Specify mount dir for container '/data'
+  -bin=DIR          Specify mount dir for container '/usr/local/bin'
   -dir=DIR          Specify mount dir for container '~/' (default: pwd)
   -<digits>         Specify OpenFOAM version (eg, -2112)
   -base | -dev | -run | -tut | -default
@@ -178,7 +179,7 @@ esac
 # Parse options
 
 unset image sudo
-unset mount1Dir mount2Dir
+unset mount1Dir mount2Dir mount3Dir
 unset optDryrun optEntrypoint optShellCommand optUpdate optVerbose optShmSize
 unset optX11Forwarding
 
@@ -240,6 +241,12 @@ do
     (-data=*)
         mount2Dir="${1#*=}"
         ;;
+
+    # Additional bin mount
+    (-bin=*)
+        mount3Dir="${1#*=}"
+        ;;
+
     (-entry=*)            # Alternative entrypoint
         optEntrypoint="${1#*=}"
         ;;
@@ -348,6 +355,17 @@ then
     fi
 fi
 
+# bin directory (optional)
+if [ -n "$mount3Dir" ]
+then
+    if [ -d "$mount3Dir" ]
+    then
+        mount3Dir="$(cd "$mount3Dir" && pwd -P)"
+    else
+        echo "${0##*/}: ignore invalid -bin directory: $mount3Dir" 1>&2
+        unset mount3Dir
+    fi
+fi
 
 # Older (non-nss) user/group handling
 # userMapping()
@@ -433,6 +451,7 @@ exec $runPrefix ${toolChain:?} run \
     --user="$guest_uid:$guest_gid" \
     ${mount1Dir:+--volume="$mount1Dir:$container_home"} \
     ${mount2Dir:+--volume="$mount2Dir:/data"} \
+    ${mount3Dir:+--volume="$mount3Dir:/usr/local/bin"} \
     $(x11Mapping) \
     ${optShmSize:+--shm-size="$optShmSize"} \
     ${optEntrypoint:+--entrypoint="$optEntrypoint"} \
