@@ -78,6 +78,7 @@
     watchexec
     wget
     xclip
+    xq-xml
     xz
     yq-go
     # zellij (added as program integration)
