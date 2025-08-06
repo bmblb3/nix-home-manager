@@ -147,6 +147,12 @@
 
   programs.atuin = {
     enable = true;
+    settings = {
+      enter_accept = false;
+      keymap_mode = "auto";
+      style = "auto";
+      exit_mode = "return-query";
+    };
     flags = [
       "--disable-up-arrow"
     ];
