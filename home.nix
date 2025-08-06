@@ -145,6 +145,11 @@
     nix-direnv.enable = true;
   };
 
+  programs.atuin = {
+    enable = true;
+    daemon.enable = true;
+  };
+
   programs.fish = {
     enable = true;
 
