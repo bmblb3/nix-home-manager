@@ -104,6 +104,8 @@
     settings = {
       username.show_always = true;
       hostname.ssh_only = false;
+      scan_timeout = 20;
+      command_timeout = 50;
     };
   };
 
