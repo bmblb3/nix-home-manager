@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+w1=6  # COUNT
+w3=51 # NAME
+w4=31 # CWD
+w5=15 # BRANCH
+w6=15 # FILETYPE
+awk_format="%-${w1}s %-${w3}s %-${w4}s %-${w5}s %-${w6}s\n"
+
+filepath_buffer=$(mktemp)
+fd . "$HOME/.local/share/nvim/scratch/" >>"$filepath_buffer"
+
+(xargs -n 1 basename <"$filepath_buffer" |
+  sed 's/_%7C/󰳭/g;
+       s/_%2F/\//g;
+       s/\.\([^.]*\)$/󰳭\1/;
+       :a; s/󰳭󰳭/󰳭󰳭/g; ta;s/^󰳭/󰳭/g' |
+  awk -F'󰳭' -v w1=$w1 -v w3=$w3 -v w4=$w4 -v w5=$w5 -v w6=$w6 -v fmt="$awk_format" \
+    'function trunc_left(s, w) {
+      if (length(s) > w) {
+        return "..." substr(s, length(s)-w+4)  # 3 dots + last chars fitting width
+      }
+      return s
+    }
+
+    {
+      f1 = trunc_left($1, w1)
+      f3 = trunc_left($3, w3)
+      f4 = trunc_left($4, w4)
+      f5 = trunc_left($5, w5)
+      f6 = trunc_left($6, w6)
+
+      printf fmt, f1, f3, f4, f5, f6
+    }' |
+  sed "s//-/g") |
+  paste -d" " "$filepath_buffer" - |
+  fzf \
+    --ansi \
+    --with-nth=2.. \
+    --preview='bat -l{6} --color=always --style=plain {1}' \
+    --header "$(echo "    " | awk -v fmt="$awk_format" '{printf fmt, $1, $2, $3, $4, $5}')" \
+    --preview-window 'up,75%,border,+{2}+3/3,~3,wrap' \
+    --bind "ctrl-e:execute($EDITOR {1})" \
+    --bind "ctrl-y:execute(echo -n {1} | xclip -selection clipboard)+abort" |
+  cut -d" " -f1
