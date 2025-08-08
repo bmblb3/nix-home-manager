@@ -192,7 +192,7 @@
     enable = true;
   };
   xdg.configFile."zellij/config.kdl".text = ''
-    theme "tokyo-night"
+    theme "catppuccin-macchiato"
     default_mode "locked"
     pane_frames false
     show_startup_tips false
