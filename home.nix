@@ -203,8 +203,8 @@
     }
     keybinds {
         locked {
-            bind "Shift Left" { MoveTab "Left"; }
-            bind "Shift Right" { MoveTab "Right"; }
+            bind "Shift Left" { MoveFocusOrTab "Left"; }
+            bind "Shift Right" { MoveFocusOrTab "Right"; }
             bind "Shift Up" { MoveFocus "Up"; }
             bind "Shift Down" { MoveFocus "Down"; }
         }
