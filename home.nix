@@ -202,10 +202,12 @@
       }
     }
     keybinds {
-      shared_except "locked" {
-        bind "Alt ö" { PreviousSwapLayout; }
-        bind "Alt ä" { NextSwapLayout; }
-      }
+        locked {
+            bind "Shift Left" { MoveTab "Left"; }
+            bind "Shift Right" { MoveTab "Right"; }
+            bind "Shift Up" { MoveFocus "Up"; }
+            bind "Shift Down" { MoveFocus "Down"; }
+        }
     }
   '';
 
