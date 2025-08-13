@@ -44,11 +44,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755075802,
-        "narHash": "sha256-VG0U2EFai933L6peqQtcCwpZTa8XkzHVtxtyyntbJFU=",
+        "lastModified": 1755077029,
+        "narHash": "sha256-bhyKkBdVHDOtS8pqydOiw5XjnJ9qzYkl6vC4lXqfQCI=",
         "ref": "main",
-        "rev": "464e978f9600b958eccbfd9f9a700d5aad7a8e0a",
-        "revCount": 43,
+        "rev": "847949a341a3d29a107757f97ac646792c931a4f",
+        "revCount": 44,
         "type": "git",
         "url": "ssh://git@github.com/bmblb3/nvim_nixcats.git"
       },
