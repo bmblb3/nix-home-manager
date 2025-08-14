@@ -176,18 +176,6 @@
     };
   };
 
-  programs.bash = {
-    enable = true;
-
-    initExtra = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      then
-        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-    '';
-  };
-
   programs.zellij = {
     enable = true;
   };
@@ -232,7 +220,6 @@
     "$HOME/.local/bin"
   ];
 
-  services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
     addKeysToAgent = "12h";
