@@ -15,7 +15,7 @@ fd . "$HOME/.local/share/nvim/scratch/" >>"$filepath_buffer"
        s/_%2F/\//g;
        s/\.\([^.]*\)$/󰳭\1/;
        :a; s/󰳭󰳭/󰳭󰳭/g; ta;s/^󰳭/󰳭/g' |
-  awk -F'󰳭' -v w1=$w1 -v w3=$w3 -v w4=$w4 -v w5=$w5 -v w6=$w6 -v fmt="$awk_format" \
+  awk -F'󰳭' -v w1="$w1" -v w3="$w3" -v w4="$w4" -v w5="$w5" -v w6="$w6" -v fmt="$awk_format" \
     'function trunc_left(s, w) {
       if (length(s) > w) {
         return "..." substr(s, length(s)-w+4)  # 3 dots + last chars fitting width
@@ -41,5 +41,6 @@ fd . "$HOME/.local/share/nvim/scratch/" >>"$filepath_buffer"
     --header "$(echo "    " | awk -v fmt="$awk_format" '{printf fmt, $1, $2, $3, $4, $5}')" \
     --preview-window 'up,75%,border,+{2}+3/3,~3,wrap' \
     --bind "ctrl-e:execute($EDITOR {1})" \
+    --query "markdown" \
     --bind "ctrl-y:execute(echo -n {1} | xclip -selection clipboard)+abort" |
   cut -d" " -f1
