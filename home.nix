@@ -68,6 +68,7 @@
     sqlcheck
     sqlite
     sqlitebrowser
+    sshfs
     # starship (added as program integration)
     sysstat
     tealdeer
