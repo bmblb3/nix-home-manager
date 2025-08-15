@@ -50,12 +50,12 @@
         "rev": "847949a341a3d29a107757f97ac646792c931a4f",
         "revCount": 44,
         "type": "git",
-        "url": "ssh://git@github.com/bmblb3/nvim_nixcats.git"
+        "url": "https://github.com/bmblb3/nvim_nixcats"
       },
       "original": {
         "ref": "main",
         "type": "git",
-        "url": "ssh://git@github.com/bmblb3/nvim_nixcats.git"
+        "url": "https://github.com/bmblb3/nvim_nixcats"
       }
     },
     "nixpkgs": {
