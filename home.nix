@@ -228,7 +228,12 @@
 
   programs.kitty = {
     enable = true;
-    font.name = "Fira Mono";
+    font = {
+      name = "Agave Nerd Font Mono";
+      package = pkgs.nerd-fonts.agave;
+      size = "11";
+    };
+    themeFile = "Monokai_Soda";
   };
 
   home.stateVersion = "25.05";
