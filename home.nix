@@ -226,6 +226,8 @@
     addKeysToAgent = "12h";
   };
 
+  programs.kitty.enable = true;
+
   home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
