@@ -66,6 +66,7 @@
     rmlint
     rsync
     rustc
+    (rWrapper.override { packages = [ rPackages.tidyverse ]; })
     sqlcheck
     sqlite
     sqlitebrowser
