@@ -226,7 +226,10 @@
     addKeysToAgent = "12h";
   };
 
-  programs.kitty.enable = true;
+  programs.kitty = {
+    enable = true;
+    font.name = "Fira Mono";
+  };
 
   home.stateVersion = "25.05";
 
