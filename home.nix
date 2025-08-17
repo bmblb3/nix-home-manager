@@ -39,6 +39,7 @@
     glow
     gnumake
     gnupg
+    gnuplot
     gnused
     gnutar
     hugo
