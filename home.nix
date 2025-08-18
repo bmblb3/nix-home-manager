@@ -84,7 +84,7 @@
     xq-xml
     xz
     yq-go
-    # zellij (added as program integration)
+    # zellij (use kitty instead)
     zig
     zip
     # zoxide (added as program integration)
@@ -179,29 +179,6 @@
     };
   };
 
-  programs.zellij = {
-    enable = true;
-  };
-  xdg.configFile."zellij/config.kdl".text = ''
-    theme "catppuccin-macchiato"
-    default_mode "locked"
-    pane_frames false
-    show_startup_tips false
-    ui {
-      pane_frames {
-        hide_session_name true
-      }
-    }
-    keybinds {
-        locked {
-            bind "Shift Left" { MoveFocusOrTab "Left"; }
-            bind "Shift Right" { MoveFocusOrTab "Right"; }
-            bind "Shift Up" { MoveFocus "Up"; }
-            bind "Shift Down" { MoveFocus "Down"; }
-        }
-    }
-  '';
-
   programs.visidata = {
     enable = true;
     visidatarc = ''
@@ -236,6 +213,13 @@
       size = 16;
     };
     themeFile = "Monokai_Soda";
+    extraConfig = ''
+      map shift+up previous_window
+      map shift+down next_window
+      map shift+left previous tab
+      map shift+down next_tab
+      map shift+f2 set_window_title
+    '';
   };
 
   home.stateVersion = "25.05";
