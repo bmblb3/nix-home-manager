@@ -217,7 +217,7 @@
       map shift+up previous_window
       map shift+down next_window
       map shift+left previous tab
-      map shift+down next_tab
+      map shift+right next_tab
       map shift+f2 set_window_title
     '';
   };
