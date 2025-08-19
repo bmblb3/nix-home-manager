@@ -20,6 +20,7 @@
     bat
     btop
     cargo
+    cargo-generate
     cht-sh
     clang-tools
     cmake
