@@ -23,6 +23,7 @@
     cht-sh
     clang-tools
     cmake
+    cookiecutter
     curl
     devenv
     # direnv (added as program integration)
