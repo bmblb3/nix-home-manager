@@ -4,7 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixCats-nvim.url = "git+https://github.com/bmblb3/nvim_nixcats?ref=main";
+    nixCats-nvim.url = "git+ssh://git@ssh.github.com:443/bmblb3/nvim_nixcats?ref=main";
     nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
