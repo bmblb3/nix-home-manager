@@ -21,6 +21,7 @@
     btop
     cargo
     cargo-generate
+    cargo-release
     cht-sh
     clang-tools
     cmake
