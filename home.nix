@@ -38,6 +38,7 @@
     gawk
     gcc
     # git (added as program integration)
+    git-cliff
     git-filter-repo
     glow
     gnumake
