@@ -106,6 +106,8 @@
     delta.enable = true;
   };
 
+  programs.gh.enable = true;
+
   programs.starship = {
     enable = true;
     settings = {
