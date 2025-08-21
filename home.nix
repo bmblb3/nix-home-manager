@@ -17,6 +17,7 @@
   nvim.enable = true;
 
   home.packages = with pkgs; [
+    act
     bat
     btop
     cargo
@@ -27,71 +28,49 @@
     cmake
     cookiecutter
     curl
-    devenv
-    # direnv (added as program integration)
     docker-compose
     dos2unix
-    # eza (added as program integration)
-    # fd (added as program integration)
     file
-    # fzf (added as program integration)
     gawk
     gcc
-    # git (added as program integration)
     git-cliff
     git-filter-repo
-    glow
     gnumake
     gnupg
     gnuplot
     gnused
     gnutar
-    hugo
     imagemagick
     jq
-    # lazygit (added as program integration)
     libevent
     libtool
-    moreutils
     lsof
+    moreutils
     ncdu
-    # neovim (added as nixCats module)
-    ninja
     nix-output-monitor
     nodejs_22
     p7zip
     pandoc
     postgresql
-    python310
+    python312Full
     quarto
-    R
-    # ripgrep (added as program integration)
     ripgrep-all
     rmlint
     rsync
-    rustc
     (rWrapper.override { packages = [ rPackages.tidyverse ]; })
-    sqlcheck
     sqlite
-    sqlitebrowser
     sshfs
-    # starship (added as program integration)
-    sysstat
     tealdeer
     typst
-    typstyle
     unzip
-    vifm
     watchexec
     wget
     xclip
     xq-xml
     xz
     yq-go
-    # zellij (use kitty instead)
     zig
     zip
-    # zoxide (added as program integration)
     zstd
   ];
 
