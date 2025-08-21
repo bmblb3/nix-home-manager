@@ -71,6 +71,7 @@
     rsync
     rustc
     (rWrapper.override { packages = [ rPackages.tidyverse ]; })
+    sensible-utils
     sqlcheck
     sqlite
     sqlitebrowser
