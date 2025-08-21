@@ -57,6 +57,7 @@
     ripgrep-all
     rmlint
     rsync
+    rustc
     (rWrapper.override { packages = [ rPackages.tidyverse ]; })
     sqlite
     sshfs
