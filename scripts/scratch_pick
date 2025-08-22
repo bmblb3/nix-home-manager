@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 w1=6  # COUNT
 w3=51 # NAME
@@ -41,6 +42,6 @@ fd . "$HOME/.local/share/nvim/scratch/" >>"$filepath_buffer"
     --header "$(echo "    " | awk -v fmt="$awk_format" '{printf fmt, $1, $2, $3, $4, $5}')" \
     --preview-window 'up,75%,border,+{2}+3/3,~3,wrap' \
     --bind "ctrl-e:execute($EDITOR {1})" \
-    --query "markdown" \
+    --query "Scratch" \
     --bind "ctrl-y:execute(echo -n {1} | xclip -selection clipboard)+abort" |
   cut -d" " -f1
