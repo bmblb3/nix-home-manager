@@ -202,7 +202,7 @@
     font = {
       name = "Agave Nerd Font Mono";
       package = pkgs.nerd-fonts.agave;
-      size = 16;
+      size = 22;
     };
     themeFile = "Monokai_Soda";
     extraConfig = ''
