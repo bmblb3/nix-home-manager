@@ -206,6 +206,7 @@
     };
     themeFile = "Monokai_Soda";
     extraConfig = ''
+      startup_session ~/launch.kitty-session
       map shift+up previous_window
       map shift+down next_window
       map shift+left previous_tab
