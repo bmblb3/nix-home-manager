@@ -1,11 +1,10 @@
-#! /usr/bin/env nix-shell
-#! nix-shell -i python3 -p python3
-import sys
+#!/usr/bin/env python3
 import re
 import subprocess
+import sys
 
 
-def run_column(text, sep, output_sep):
+def fmt_table(text: str, sep: str, output_sep: str) -> str:
     proc = subprocess.run(
         ["column", "-t", f"-s{sep}", f"-o{output_sep}"],
         input=text,
@@ -15,36 +14,37 @@ def run_column(text, sep, output_sep):
     return proc.stdout
 
 
-def protect_strings(text):
-    parts = []
+def mask_quoted_strings(text: str) -> tuple[str, list[str]]:
+    original_strings: list[str] = []
 
-    def replacer(match):
-        original = match.group()
-        parts.append(original)
-        return "X" * len(original)
+    def mask_and_store(match: re.Match[str]) -> str:
+        to_mask = match.group()
+        original_strings.append(to_mask)
+        return "X" * len(to_mask)
 
-    return re.sub(r"'[^']*'", replacer, text), parts
+    return re.sub(r"'[^']*'", mask_and_store, text), original_strings
 
 
-def restore_strings(text, parts):
-    for i, part in enumerate(parts):
-        placeholder = "X" * len(part)
-        text = text.replace(placeholder, part, 1)
+def restore_masked_strings(masked_text: str, original_strings: list[str]) -> str:
+    text = masked_text
+    for original in original_strings:
+        mask = "X" * len(original)
+        text = text.replace(mask, original, 1)
     return text
 
 
 text = sys.stdin.read()
 
-text, protected = protect_strings(text)
+text, quoted_strings = mask_quoted_strings(text)
 
 text = re.sub(r"([^ \n]) +", r"\1 ", text)  # squeeze all except leading spaces
-text = re.sub(r" *\)", " )", text)  # squeeze/expand so that ) always follows one space
 text = re.sub(r"\( *", "( ", text)  # squeeze/expand so that one space always follows (
+text = re.sub(r" *\)", " )", text)  # squeeze/expand so that ) always follows one space
 text = re.sub(r" *, *", " , ", text)  # squeeze/expand so one space always surrounds ,
 
-text = run_column(text, "(", "(")
-text = run_column(text, ",", ",")
-text = run_column(text, ")", ")")
+text = fmt_table(text, "(", "(")
+text = fmt_table(text, ",", ",")
+text = fmt_table(text, ")", ")")
 
 text = re.sub(r" +$", "", text, flags=re.MULTILINE)  # remove any trailing space
 text = re.sub(
@@ -52,8 +52,8 @@ text = re.sub(
 )  # remove leading space for a comma at end of line
 text = re.sub(
     r"([^\)]), *$", r"\1", text, flags=re.MULTILINE
-)  # remove comma at end of line if not preceeded by )
+)  # remove comma at end of line if not preceeded by ")"
 
-text = restore_strings(text, protected)
+text = restore_masked_strings(text, quoted_strings)
 
 print(text, end="")
