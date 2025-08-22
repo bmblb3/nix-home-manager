@@ -9,12 +9,11 @@
   };
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       nixCats-nvim,
       ...
-    }@inputs:
+    }:
     {
       homeConfigurations = {
         akucwh = home-manager.lib.homeManagerConfiguration {
