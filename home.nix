@@ -188,6 +188,13 @@
   programs.ssh = {
     enable = true;
     addKeysToAgent = "12h";
+    matchBlocks = {
+      "github.com" = {
+        hostname = "ssh.github.com";
+        port = 443;
+        user = "git";
+      };
+    };
   };
 
   programs.kitty = {
