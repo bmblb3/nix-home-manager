@@ -11,7 +11,7 @@ if [[ -z "${gh_repo:-}" && -z "${glab_repo:-}" ]]; then
 fi
 
 if [[ -n "${gh_repo:-}" ]]; then
-  command -v gh 2>/dev/null || {
+  command -v gh &>/dev/null || {
     echo "Executable 'gh' not found"
     exit 1
   }
@@ -21,7 +21,7 @@ if [[ -n "${gh_repo:-}" ]]; then
 fi
 
 if [[ -n "${glab_repo:-}" ]]; then
-  command -v glab 2>/dev/null || {
+  command -v glab &>/dev/null || {
     echo "Executable 'glab' not found"
     exit 1
   }
