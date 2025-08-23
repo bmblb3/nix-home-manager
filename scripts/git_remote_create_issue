@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-label=$(printf "enhancement
-bug" | fzf \
-  --prompt="What type of issue is it? > " \
-  --layout=reverse \
-  --border=rounded \
-  --height=10)
-
 unset gh_repo glab_repo
 git remote get-url origin 2>/dev/null | grep -q 'github.com' && gh_repo=1
 git remote get-url origin 2>/dev/null | grep -q 'gitlab.com' && glab_repo=1
@@ -23,7 +16,7 @@ if [[ -n "${gh_repo:-}" ]]; then
     exit 1
   }
 
-  gh issue create --label "$label" --editor
+  gh issue create --editor
   exit 0
 fi
 
@@ -33,6 +26,6 @@ if [[ -n "${glab_repo:-}" ]]; then
     exit 1
   }
 
-  glab issue create --label "$label" --editor
+  glab issue create --editor
   exit 0
 fi
