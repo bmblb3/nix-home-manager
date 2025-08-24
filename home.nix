@@ -84,7 +84,10 @@
     delta.enable = true;
   };
 
-  programs.gh.enable = true;
+  programs.gh = {
+    enable = true;
+    extensions = with pkgs; [ gh-copilot ];
+  };
   programs.gh-dash.enable = true;
 
   programs.starship = {
