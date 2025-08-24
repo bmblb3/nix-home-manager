@@ -7,14 +7,17 @@
     nixCats-nvim.url = "github:bmblb3/nvim_nixcats";
     nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
   };
+
   outputs =
     {
       nixpkgs,
       home-manager,
       nixCats-nvim,
-      system,
       ...
     }:
+    let
+      system = "x86_64-linux";
+    in
     {
       homeConfigurations = {
         akucwh = home-manager.lib.homeManagerConfiguration {
