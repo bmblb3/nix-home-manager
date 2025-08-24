@@ -12,12 +12,16 @@
       nixpkgs,
       home-manager,
       nixCats-nvim,
+      system,
       ...
     }:
     {
       homeConfigurations = {
         akucwh = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
           modules = [ ./home.nix ];
           extraSpecialArgs = {
             username = "akucwh";
@@ -25,7 +29,10 @@
           };
         };
         bmblb3 = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
           modules = [ ./home.nix ];
           extraSpecialArgs = {
             username = "bmblb3";
