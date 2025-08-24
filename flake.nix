@@ -17,9 +17,12 @@
     }:
     let
       system = "x86_64-linux";
+      unfree = [ "gh-copilot" ];
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfree = true;
+        config.allowUnfreePredicate = (
+          pkg: builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) unfree
+        );
       };
     in
     {
