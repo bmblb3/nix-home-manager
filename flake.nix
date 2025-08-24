@@ -17,14 +17,15 @@
     }:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
       homeConfigurations = {
         akucwh = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          inherit pkgs;
           modules = [ ./home.nix ];
           extraSpecialArgs = {
             username = "akucwh";
@@ -32,10 +33,7 @@
           };
         };
         bmblb3 = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          inherit pkgs;
           modules = [ ./home.nix ];
           extraSpecialArgs = {
             username = "bmblb3";
