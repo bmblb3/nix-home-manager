@@ -64,7 +64,7 @@
     unzip
     watchexec
     wget
-    xclip
+    xsel
     xq-xml
     xz
     yq-go
@@ -201,14 +201,6 @@
     functions = {
       fish_greeting = "";
     };
-  };
-
-  programs.visidata = {
-    enable = true;
-    visidatarc = ''
-      options.clipboard_copy_cmd='xclip -selection clipboard -filter'
-      options.clipboard_paste_cmd='xclip -selection clipboard -o'
-    '';
   };
 
   programs.pgcli.enable = true;

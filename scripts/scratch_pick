@@ -42,6 +42,5 @@ fd . "$HOME/.local/share/nvim/scratch/" >>"$filepath_buffer"
     --header "$(echo "    " | awk -v fmt="$awk_format" '{printf fmt, $1, $2, $3, $4, $5}')" \
     --preview-window 'up,75%,border,+{2}+3/3,~3,wrap' \
     --bind "ctrl-e:execute($EDITOR {1})" \
-    --query "Scratch" \
-    --bind "ctrl-y:execute(echo -n {1} | xclip -selection clipboard)+abort" |
+    --query "Scratch" |
   cut -d" " -f1
