@@ -49,6 +49,7 @@
     p7zip
     pandoc
     postgresql
+    pre-commit
     python312Full
     quarto
     ripgrep-all
