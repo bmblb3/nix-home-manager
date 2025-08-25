@@ -88,7 +88,43 @@
     enable = true;
     extensions = with pkgs; [ gh-copilot ];
   };
-  programs.gh-dash.enable = true;
+
+  programs.gh-dash = {
+    enable = true;
+    settings = {
+      smartFilteringAtLaunch = true;
+      defaults = {
+        view = "issues";
+        preview.width = 64;
+      };
+      issuesSections = [
+        {
+          title = "Open";
+          filters = "is:open";
+        }
+        {
+          title = "Closed";
+          filters = "is:closed";
+        }
+      ];
+      keybindings = {
+        universal = [
+          {
+            key = "g";
+            name = "lazygit";
+            command = "cd {{.repoPath}} && lazygit";
+          }
+        ];
+        issues = [
+          {
+            key = "n";
+            name = "lazygit";
+            command = "gh issue create --editor";
+          }
+        ];
+      };
+    };
+  };
 
   programs.starship = {
     enable = true;
