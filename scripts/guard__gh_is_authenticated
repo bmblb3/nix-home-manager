@@ -2,5 +2,4 @@
 set -euo pipefail
 
 git remote get-url origin 2>/dev/null | grep -q 'github.com' || exit 1
-command -v gh &>/dev/null || exit 1
 gh auth status || exit 1
