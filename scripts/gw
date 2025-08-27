@@ -1,0 +1,199 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# BEGIN HELPERS
+
+function check_git_repo() {
+  if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+    echo "Not inside a git repository." >&2
+    exit 1
+  fi
+}
+
+function check_github_remote() {
+  if ! git remote -v | grep -q "github.com"; then
+    echo "No remote with 'github.com' found." >&2
+    exit 1
+  fi
+}
+
+function check_gh_cli() {
+  if ! command -v gh &>/dev/null; then
+    echo "'gh' CLI not found in PATH." >&2
+    exit 1
+  fi
+}
+
+function check_gh_auth() {
+  if ! gh auth status &>/dev/null; then
+    echo "Not authenticated with GitHub CLI." >&2
+    exit 1
+  fi
+}
+
+function get_current_branch() {
+  git rev-parse --abbrev-ref HEAD
+}
+
+prompt() {
+  [[ "$PROMPT_MODE" == true ]] && echo "$1" && exit 0
+  return 0
+}
+# END HELPERS
+
+# BEGIN WORKFLOWS
+
+function wf_create_issue() {
+  prompt "📝 Create a new issue:
+- Opens the text editor with an issue template loaded.
+- Here, you can write a description of the issue.
+- You must save and exit the editor.
+- Attempts to create an issue (using github cli).
+- Finally, re-run this script from the 'main' branch to start working on the issue.
+"
+  gh issue create --assignee @me --editor
+}
+
+function _checkout_issue_branch() {
+  tmpout=$(mktemp)
+  gh issue develop --list """$1" >"""$tmpout"
+
+  if [[ -s ""$tmpout ]]; then
+    cut -f1 """$tmpout" | xargs git checkout
+    return 0
+  fi
+  return 1
+}
+
+function wf_develop_issue() {
+  prompt "💻 Work on an issue:
+- You will be prompted to select an existing issue.
+- The linked issue branch will be checked out
+    - The branch will be created if needed.
+- From this branch, you can make commits and pushes normally.
+- Finally, rerun this script from the issue-branch to close the issue with a PR.
+"
+  issues=$(gh issue list --state open --json number,title)
+  mapfile -t choices < <(echo """$issues" | jq -r '.[] | "#\(.number) : \(.title)"' | column -t -s ":")
+  if [[ ${#choices[@]} -eq 0 ]]; then
+    echo "No open issues."
+    exit 0
+  fi
+
+  selected=$(printf "%s\n" "${choices[@]}" | fzf)
+  if [[ -z "$selected" ]]; then
+    echo "No issue selected." >&2
+    exit 1
+  fi
+
+  issue_number=$(echo "$selected" | awk '{print $1}' | sed 's/#//g;s/ //g')
+
+  tmpout=$(mktemp)
+  gh issue develop --list "$issue_number" >"$tmpout"
+
+  _checkout_issue_branch "$issue_number" ||
+    gh issue develop "$issue_number" --checkout
+
+  branch=$(get_current_branch)
+  if [[ $branch == "main" ]]; then
+    echo "Something went wrong, still on main branch." >&2
+    exit 1
+  fi
+}
+
+function wf_resolve_issue() {
+  prompt "✅ Resolve current issue:
+- A PR will be opened from this issue branch to main.
+- This PR will be merged and the current issue branch closed.
+- You will go back to main. Re-run this from 'main'
+    - to create issues / work on other issues.
+    - OR to create a new release.
+"
+  gh pr create --assignee @me --fill
+  gh pr merge --merge --delete-branch
+}
+
+function wf_prepare_release() {
+  prompt "🧰 Prepare for a release:
+- Auto bump versions in files (but not tags).
+- Creates (and checks out) a new release-branch.
+- You can verify the changes, commit / push as normal.
+- Finally, rerun the script from this release- branch and choose '🚀 Release!'
+"
+}
+
+function wf_release() {
+  prompt "🚀 Release:
+- A PR will be opened from this release-branch to main.
+- This PR will be merged and the current release-branch closed.
+"
+}
+# END WORKFLOWS
+
+function select_workflow() {
+  local -n wfs="$1"
+  avail=()
+
+  PROMPT_MODE=true
+  for wf in "${wfs[@]}"; do
+    avail+=("$("$wf")")
+  done
+  PROMPT_MODE=false
+
+  selected=$(printf "%s\0" "${avail[@]}" |
+    fzf \
+      --read0 \
+      --delimiter=":" \
+      --with-nth=1 \
+      --prompt="Select a workflow: " \
+      --height=15 --border \
+      --preview="echo {2..}" \
+      --preview-window=down:5:wrap)
+  if [[ -z "$selected" ]]; then
+    echo "No workflow selected." >&2
+    exit 1
+  fi
+
+  idx=-1
+  for i in "${!avail[@]}"; do
+    if [[ "${avail[$i]}" == "$selected" ]]; then
+      idx=$i
+      break
+    fi
+  done
+
+  echo "${wfs[idx]}"
+}
+
+main() {
+  check_git_repo
+  check_github_remote
+  check_gh_cli
+  check_gh_auth
+
+  branch=$(get_current_branch)
+
+  workflows=()
+  if [[ "$branch" == "main" ]]; then
+    workflows+=(
+      wf_create_issue
+      wf_develop_issue
+      wf_prepare_release
+    )
+  elif [[ "$branch" =~ ^[0-9]-* ]]; then
+    workflows+=(wf_resolve_issue)
+  elif [[ "$branch" =~ ^release-* ]]; then
+    workflows+=(wf_release)
+  else
+    echo "No workflows available on current branch." >&2
+    exit 1
+  fi
+
+  workflow=$(select_workflow workflows)
+
+  PROMPT_MODE=false
+  ("$workflow")
+}
+
+main "$@"
