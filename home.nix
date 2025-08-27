@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   username,
   nixCats-nvim,
@@ -206,12 +207,8 @@
 
   programs.pgcli.enable = true;
 
-  home.file = {
-    ".local/bin" = {
-      source = ./scripts;
-      recursive = true;
-    };
-  };
+  home.file.".local/bin".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/scripts";
 
   home.sessionPath = [
     "$HOME/.local/bin"
