@@ -207,7 +207,8 @@
 
   programs.pgcli.enable = true;
 
-  home.file.".local/bin".source = config.lib.file.mkOutOfStoreSymlink ./scripts;
+  home.file.".local/bin".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/scripts";
 
   home.sessionPath = [
     "$HOME/.local/bin"
