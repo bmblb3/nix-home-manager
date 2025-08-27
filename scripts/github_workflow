@@ -199,7 +199,7 @@ main() {
   guard__is_git_repo
   guard__is_clean_repo
   guard__has_github_remote
-  guard__gh
+  guard__gh_is_authenticated_for_current_repo
 
   branch=$(get_current_branch)
 
