@@ -4,28 +4,37 @@ set -euo pipefail
 
 # BEGIN HELPERS
 
-function check_git_repo() {
+function guard__command_in_PATH() {
+  for cmd in "$@"; do
+    if ! command -v "$cmd" &>/dev/null; then
+      echo "'$cmd' CLI not found in PATH." >&2
+      exit 1
+    fi
+  done
+}
+
+function guard__is_git_repo() {
   if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     echo "Not inside a git repository." >&2
     exit 1
   fi
 }
 
-function check_github_remote() {
+function guard__is_clean_repo() {
+  test "$(git status --porcelain)" = "" || {
+    echo "Dirty tree detected. Aborting." >&2
+    exit 1
+  }
+}
+
+function guard__has_github_remote() {
   if ! git remote -v | grep -q "github.com"; then
     echo "No remote with 'github.com' found." >&2
     exit 1
   fi
 }
 
-function check_gh_cli() {
-  if ! command -v gh &>/dev/null; then
-    echo "'gh' CLI not found in PATH." >&2
-    exit 1
-  fi
-}
-
-function check_gh_auth() {
+function guard__gh_is_authenticated() {
   if ! gh auth status &>/dev/null; then
     echo "Not authenticated with GitHub CLI." >&2
     exit 1
@@ -56,11 +65,10 @@ function wf_create_issue() {
 }
 
 function _checkout_issue_branch() {
-  tmpout=$(mktemp)
-  gh issue develop --list """$1" >"""$tmpout"
-
-  if [[ -s ""$tmpout ]]; then
-    cut -f1 """$tmpout" | xargs git checkout
+  local branches
+  branches=$(gh issue develop --list "$1")
+  if [[ -n "$branches" ]]; then
+    git checkout "$(echo "$branches" | head -n1 | cut -f1)"
     return 0
   fi
   return 1
@@ -133,27 +141,9 @@ function wf_prepare_release() {
 - Finally, rerun the script from this release- branch and choose '🚀 Release!'
 "
   if [[ -f Cargo.toml ]]; then
-    if ! command -v cargo &>/dev/null; then
-      echo "'cargo' CLI not found in PATH." >&2
-      exit 1
-    fi
-    if ! command -v cargo-semver-checks &>/dev/null; then
-      echo "'cargo-semver-checks' CLI not found in PATH." >&2
-      exit 1
-    fi
-    if ! command -v release-plz &>/dev/null; then
-      echo "'release-plz' CLI not found in PATH." >&2
-      exit 1
-    fi
-
-    test "$(git status --porcelain)" = "" || {
-      echo "Dirty tree detected. Aborting."
-      exit 1
-    }
-
+    guard__command_in_PATH cargo cargo-semver-checks release-plz
     echo "Running release-plz, this might take a while..."
     release-plz update
-
     new_version=$(cargo read-manifest | jq -r .version)
     git checkout -b "release-$new_version"
   fi
@@ -168,16 +158,7 @@ function wf_release() {
   gh pr create --assignee @me --fill
   gh pr merge --merge --delete-branch
   if [[ -f Cargo.toml ]]; then
-    if ! command -v cargo &>/dev/null; then
-      echo "'cargo' CLI not found in PATH." >&2
-      exit 1
-    fi
-
-    test "$(git status --porcelain)" = "" || {
-      echo "Dirty tree detected. Aborting."
-      exit 1
-    }
-
+    guard__command_in_PATH cargo
     new_version=$(cargo read-manifest | jq -r .version)
     git tag -a "v$new_version" -m "Release v$new_version"
     git push origin "v$new_version"
@@ -221,10 +202,11 @@ function select_workflow() {
 }
 
 main() {
-  check_git_repo
-  check_github_remote
-  check_gh_cli
-  check_gh_auth
+  guard__command_in_PATH gh git
+  guard__is_git_repo
+  guard__is_clean_repo
+  guard__has_github_remote
+  guard__gh_is_authenticated
 
   branch=$(get_current_branch)
 
