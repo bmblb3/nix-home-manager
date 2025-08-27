@@ -152,7 +152,25 @@ function wf_release() {
   prompt "🚀 Release:
 - A PR will be opened from this release-branch to main.
 - This PR will be merged and the current release-branch closed.
+- Finally, a tag is generated and pushed (to trigger CD actions).
 "
+  gh pr create --assignee @me --fill
+  gh pr merge --merge --delete-branch
+  if [[ -f Cargo.toml ]]; then
+    if ! command -v cargo &>/dev/null; then
+      echo "'cargo' CLI not found in PATH." >&2
+      exit 1
+    fi
+
+    test "$(git status --porcelain)" = "" || {
+      echo "Dirty tree detected. Aborting."
+      exit 1
+    }
+
+    new_version=$(cargo read-manifest | jq -r .version)
+    git tag -a "v$new_version" -m "Release v$new_version"
+    git push origin "v$new_version"
+  fi
 }
 # END WORKFLOWS
 
