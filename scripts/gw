@@ -121,6 +121,31 @@ function wf_prepare_release() {
 - You can verify the changes, commit / push as normal.
 - Finally, rerun the script from this release- branch and choose '🚀 Release!'
 "
+  if [[ -f Cargo.toml ]]; then
+    if ! command -v cargo &>/dev/null; then
+      echo "'cargo' CLI not found in PATH." >&2
+      exit 1
+    fi
+    if ! command -v cargo-semver-checks &>/dev/null; then
+      echo "'cargo-semver-checks' CLI not found in PATH." >&2
+      exit 1
+    fi
+    if ! command -v release-plz &>/dev/null; then
+      echo "'release-plz' CLI not found in PATH." >&2
+      exit 1
+    fi
+
+    test "$(git status --porcelain)" = "" || {
+      echo "Dirty tree detected. Aborting."
+      exit 1
+    }
+
+    echo "Running release-plz, this might take a while..."
+    release-plz update
+
+    new_version=$(cargo read-manifest | jq -r .version)
+    git checkout -b "release-$new_version"
+  fi
 }
 
 function wf_release() {
