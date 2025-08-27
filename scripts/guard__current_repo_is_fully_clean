@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec &>/dev/null # useful for guard scripts
+
+test "$(git status --porcelain)" = ""

@@ -1,45 +1,7 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 # BEGIN HELPERS
-
-function guard__command_in_PATH() {
-  for cmd in "$@"; do
-    if ! command -v "$cmd" &>/dev/null; then
-      echo "'$cmd' CLI not found in PATH." >&2
-      exit 1
-    fi
-  done
-}
-
-function guard__is_git_repo() {
-  if ! git rev-parse --is-inside-work-tree &>/dev/null; then
-    echo "Not inside a git repository." >&2
-    exit 1
-  fi
-}
-
-function guard__is_clean_repo() {
-  test "$(git status --porcelain)" = "" || {
-    echo "Dirty tree detected. Aborting." >&2
-    exit 1
-  }
-}
-
-function guard__has_github_remote() {
-  if ! git remote -v | grep -q "github.com"; then
-    echo "No remote with 'github.com' found." >&2
-    exit 1
-  fi
-}
-
-function guard__gh_is_authenticated() {
-  if ! gh auth status &>/dev/null; then
-    echo "Not authenticated with GitHub CLI." >&2
-    exit 1
-  fi
-}
 
 function get_current_branch() {
   git rev-parse --abbrev-ref HEAD
@@ -141,7 +103,7 @@ function wf_prepare_release() {
 - Finally, rerun the script from this release- branch and choose '🚀 Release!'
 "
   if [[ -f Cargo.toml ]]; then
-    guard__command_in_PATH cargo cargo-semver-checks release-plz
+    verbose_guard guard__commands_are_in_PATH cargo cargo-semver-checks release-plz
     echo "Running release-plz, this might take a while..."
     release-plz update
     new_version=$(cargo read-manifest | jq -r .version)
@@ -158,7 +120,7 @@ function wf_release() {
   gh pr create --assignee @me --fill
   gh pr merge --merge --delete-branch
   if [[ -f Cargo.toml ]]; then
-    guard__command_in_PATH cargo
+    verbose_guard guard__commands_are_in_PATH cargo
     new_version=$(cargo read-manifest | jq -r .version)
     git tag -a "v$new_version" -m "Release v$new_version"
     git push origin "v$new_version"
@@ -202,11 +164,9 @@ function select_workflow() {
 }
 
 main() {
-  guard__command_in_PATH gh git
-  guard__is_git_repo
-  guard__is_clean_repo
-  guard__has_github_remote
-  guard__gh_is_authenticated
+  verbose_guard guard__commands_are_in_PATH gh git
+  verbose_guard guard__current_repo_is_fully_clean
+  verbose_guard guard__gh_is_authenticated_for_current_repo
 
   branch=$(get_current_branch)
 

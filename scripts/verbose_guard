@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if "$@"; then
+  exit 0
+else
+  echo "guard failed: $*"
+  exit 1
+fi
