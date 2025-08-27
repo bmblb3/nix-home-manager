@@ -174,8 +174,8 @@ function select_workflow() {
 
 main() {
   guard__command_in_PATH gh git
-  guard__current_repo_is_fully_clean
-  guard__gh_is_authenticated_for_current_repo
+  verbose_guard guard__current_repo_is_fully_clean
+  verbose_guard guard__gh_is_authenticated_for_current_repo
 
   branch=$(get_current_branch)
 
