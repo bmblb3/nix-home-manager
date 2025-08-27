@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+exec &>/dev/null # useful for guard scripts
 
-git remote get-url origin 2>/dev/null | grep -q 'github.com' || exit 1
-gh auth status || exit 1
+git remote get-url origin | grep -q 'github.com'
+gh auth status
