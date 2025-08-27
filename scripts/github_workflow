@@ -13,20 +13,6 @@ function guard__command_in_PATH() {
   done
 }
 
-function guard__is_clean_repo() {
-  test "$(git status --porcelain)" = "" || {
-    echo "Dirty tree detected. Aborting." >&2
-    exit 1
-  }
-}
-
-function guard__has_github_remote() {
-  if ! git remote -v | grep -q "github.com"; then
-    echo "No remote with 'github.com' found." >&2
-    exit 1
-  fi
-}
-
 function get_current_branch() {
   git rev-parse --abbrev-ref HEAD
 }
@@ -189,8 +175,7 @@ function select_workflow() {
 
 main() {
   guard__command_in_PATH gh git
-  guard__is_clean_repo
-  guard__has_github_remote
+  guard__current_repo_is_fully_clean
   guard__gh_is_authenticated_for_current_repo
 
   branch=$(get_current_branch)
