@@ -22,7 +22,7 @@ function guard__is_git_repo() {
 
 function guard__is_clean_repo() {
   test "$(git status --porcelain)" = "" || {
-    echo "Dirty tree detected. Aborting."
+    echo "Dirty tree detected. Aborting." >&2
     exit 1
   }
 }
