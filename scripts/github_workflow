@@ -13,13 +13,6 @@ function guard__command_in_PATH() {
   done
 }
 
-function guard__is_git_repo() {
-  if ! git rev-parse --is-inside-work-tree &>/dev/null; then
-    echo "Not inside a git repository." >&2
-    exit 1
-  fi
-}
-
 function guard__is_clean_repo() {
   test "$(git status --porcelain)" = "" || {
     echo "Dirty tree detected. Aborting." >&2
@@ -196,7 +189,6 @@ function select_workflow() {
 
 main() {
   guard__command_in_PATH gh git
-  guard__is_git_repo
   guard__is_clean_repo
   guard__has_github_remote
   guard__gh_is_authenticated_for_current_repo
