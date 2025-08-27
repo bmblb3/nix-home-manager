@@ -80,6 +80,7 @@
     extraConfig = {
       credential.helper = "store";
       init.defaultBranch = "main";
+      fetch.prune = true;
     };
     delta.enable = true;
   };
