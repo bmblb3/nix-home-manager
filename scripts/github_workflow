@@ -92,7 +92,7 @@ function wf_resolve_issue() {
     - OR to create a new release.
 "
   gh pr create --assignee @me --fill
-  gh pr merge --merge --delete-branch
+  gh pr merge --delete-branch
 }
 
 function wf_prepare_release() {
@@ -118,7 +118,7 @@ function wf_release() {
 - Finally, a tag is generated and pushed (to trigger CD actions).
 "
   gh pr create --assignee @me --fill
-  gh pr merge --merge --delete-branch
+  gh pr merge --delete-branch
   if [[ -f Cargo.toml ]]; then
     verbose_guard guard__commands_are_in_PATH cargo
     new_version=$(cargo read-manifest | jq -r .version)
