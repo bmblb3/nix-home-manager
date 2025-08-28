@@ -60,7 +60,7 @@ function wf_develop_issue() {
     --delimiter="¦" \
     --with-nth=1 \
     --prompt="Select a workflow: " \
-    --height=65 --border \
+    --height=25 --border \
     --preview="echo {2..}" \
     --preview-window=down:10:wrap)
   if [[ -z "$selected" ]]; then
@@ -144,9 +144,9 @@ function select_workflow() {
       --delimiter=":" \
       --with-nth=1 \
       --no-input \
-      --height=13 --border \
+      --height=25 --border \
       --preview="echo {2..}" \
-      --preview-window=down:6:wrap)
+      --preview-window=down:10:wrap)
   if [[ -z "$selected" ]]; then
     echo "No workflow selected." >&2
     exit 1
