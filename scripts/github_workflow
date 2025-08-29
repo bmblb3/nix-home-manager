@@ -116,7 +116,7 @@ function wf_prepare_release() {
       --read0 \
       --no-input \
       --height=45 --border \
-      --preview="echo $gitlogs" \
+      --preview="echo '$gitlogs'" \
       --preview-window=down:36:wrap)
     if [[ -z "$selected" ]]; then
       echo "Nothing selected." >&2
