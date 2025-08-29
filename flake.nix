@@ -6,6 +6,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixCats-nvim.url = "github:bmblb3/nvim_nixcats";
     nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
+    osync.url = "github:bmblb3/osync?ref=0.2.0";
   };
 
   outputs =
@@ -13,6 +14,7 @@
       nixpkgs,
       home-manager,
       nixCats-nvim,
+      osync,
       ...
     }:
     let
@@ -29,7 +31,10 @@
       homeConfigurations = {
         akucwh = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            { home.packages = [ osync.packages.${system}.default ]; }
+          ];
           extraSpecialArgs = {
             username = "akucwh";
             inherit nixCats-nvim;
