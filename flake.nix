@@ -6,7 +6,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixCats-nvim.url = "github:bmblb3/nvim_nixcats";
     nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
-    osync.url = "github:bmblb3/osync?ref=0.2.0";
+    osync.url = "github:bmblb3/osync?ref=v0.2.0";
   };
 
   outputs =
