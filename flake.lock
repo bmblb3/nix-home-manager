@@ -97,16 +97,16 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1756494749,
-        "narHash": "sha256-zZOfHTOneae6gYo/arvjhZXsvH1tGNqjfOhlO4skMIw=",
+        "lastModified": 1756504483,
+        "narHash": "sha256-Y1s4SGgAN7QjOvcdi53GbjBIQ00B7YYDa2BsyX1AKtA=",
         "owner": "bmblb3",
         "repo": "osync",
-        "rev": "883f2e4b5b04e78387f6b38a3d64ed090c6b63d1",
+        "rev": "47fbdf6820970f4b3a18ac668400633215bc541b",
         "type": "github"
       },
       "original": {
         "owner": "bmblb3",
-        "ref": "v0.2.1",
+        "ref": "v0.3.0",
         "repo": "osync",
         "type": "github"
       }
