@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+interpreters=("bash" "python3")
+
+interpreter=$(echo "${interpreters[@]}" | tr " " "\n" | fzf \
+  --ansi \
+  --header "Choose an interpreter" \
+  --preview-window 'up,75%,border,+{2}+3/3,~3,wrap')
+
+read -r -e -p "Path to script to make (must not already exist): " script_path
+[[ -e $script_path ]] && {
+  echo "Already exists!"
+  exit 1
+}
+
+tmpscript=$(mktemp)
+(
+  [[ $interpreter == "bash" ]] && printf "%s\n%s\n\n\n" "#!/usr/bin/env $interpreter" "set -euo pipefail"
+  [[ $interpreter == "python3" ]] && printf "%s\n\n\n" "#!/usr/bin/env $interpreter"
+) >"$tmpscript"
+
+chmod u+rwx "$tmpscript"
+mv "$tmpscript" "$script_path"
+
+nvim + "$script_path"
