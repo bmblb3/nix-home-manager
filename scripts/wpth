@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+if grep -qi microsoft /proc/version; then
+  in_wsl=true
+elif [[ -d /nsa/ && -d /grp/ ]]; then
+  in_simitenv=true
+else
+  echo "Error! Cannot determine where I am!" >&2
+  exit 1
+fi
+
+path="${1:-$PWD}"
+
+if [[ -n "$in_wsl" ]]; then
+  wslpath -w "$path" || {
+    echo "Error: Invalid path '$path' for WSL." >&2
+    exit 1
+  }
+  exit 0
+fi
+
+path=$(realpath "$path" 2>/dev/null)
+if [[ -n "$in_simitenv" ]]; then
+  case "$path" in
+  /nsa/*)
+    echo "$path" |
+      sed 's/\//\\/g;
+          s/\\nsa\\fluidcfd/\\\\sesonas33.isilon.scania.com\\hpc_nosync\$\\fluidcfd/g' || {
+      echo "Error: Invalid path '$path' for /nsa/." >&2
+      return 1
+    }
+    ;;
+  /home/*)
+    # handle /home/ case
+    ;;
+  /grp/*)
+    # handle /grp/ case
+    ;;
+  esac
+  exit 0
+fi

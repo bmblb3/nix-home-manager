@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+path="${1:-$PWD}"
+readlink -f "$path" 2>/dev/null
