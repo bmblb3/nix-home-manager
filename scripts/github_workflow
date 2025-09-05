@@ -205,10 +205,9 @@ main() {
 
   branch=$(get_current_branch)
 
-  workflows=()
+  workflows=(wf_create_issue)
   if [[ "$branch" == "main" ]]; then
     workflows+=(
-      wf_create_issue
       wf_develop_issue
       wf_prepare_release
     )
