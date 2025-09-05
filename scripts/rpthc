@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rpth | pbcopy
+rpth "$1" | pbcopy
