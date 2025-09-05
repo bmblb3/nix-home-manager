@@ -44,6 +44,8 @@ function wf_develop_issue() {
 - From this branch, you can make commits and pushes normally.
 - Finally, rerun this script from the issue-branch to close the issue with a PR.
 "
+  verbose_guard guard__current_repo_is_fully_clean
+
   issues=$(gh issue list --state open --json number,title,body)
   mapfile -t choices < <(echo "$issues" |
     jq -c '.[] | "#\(.number) \(.title) ¦ \(.body)"')
@@ -91,6 +93,8 @@ function wf_resolve_issue() {
     - to create issues / work on other issues.
     - OR to create a new release.
 "
+  verbose_guard guard__current_repo_is_fully_clean
+
   gh pr create --assignee @me --fill
   gh pr merge --delete-branch
 }
@@ -102,6 +106,8 @@ function wf_prepare_release() {
 - You can verify the changes, commit / push as normal.
 - Finally, rerun the script from this release- branch and choose '🚀 Release!'
 "
+  verbose_guard guard__current_repo_is_fully_clean
+
   if [[ -f Cargo.toml ]]; then
     verbose_guard guard__commands_are_in_PATH cargo cargo-semver-checks release-plz
     echo "Running release-plz, this might take a while..."
@@ -140,6 +146,8 @@ function wf_release() {
 - This PR will be merged and the current release-branch closed.
 - Finally, a tag is generated and pushed (to trigger CD actions).
 "
+  verbose_guard guard__current_repo_is_fully_clean
+
   gh pr create --assignee @me --fill
   gh pr merge --delete-branch
   if [[ -f Cargo.toml ]]; then
@@ -193,7 +201,6 @@ function select_workflow() {
 
 main() {
   verbose_guard guard__commands_are_in_PATH gh git
-  verbose_guard guard__current_repo_is_fully_clean
   verbose_guard guard__gh_is_authenticated_for_current_repo
 
   branch=$(get_current_branch)
