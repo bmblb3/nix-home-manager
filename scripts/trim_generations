@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+nix-collect-garbage --delete-old
+nix-store --optimise
+
+sudo nix-collect-garbage --delete-old
+sudo nix-store --optimise
