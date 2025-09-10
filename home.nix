@@ -130,13 +130,9 @@
 
   programs.starship = {
     enable = true;
-    settings = {
-      username.show_always = true;
-      hostname.ssh_only = false;
-      scan_timeout = 20;
-      command_timeout = 50;
-    };
   };
+  home.file.".config/starship.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotconfig/starship.toml";
 
   programs.eza = {
     enable = true;
@@ -231,8 +227,8 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "Agave Nerd Font Mono";
-      package = pkgs.nerd-fonts.agave;
+      name = "Agave";
+      package = pkgs.agave;
       size = 22;
     };
     themeFile = "Monokai_Soda";
