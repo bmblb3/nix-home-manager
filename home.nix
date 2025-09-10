@@ -44,7 +44,6 @@
     libtool
     lsof
     moreutils
-    nerd-fonts.jetbrains-mono
     ncdu
     nix-output-monitor
     nodejs_22
@@ -225,14 +224,12 @@
     };
   };
 
-  fonts.fontconfig.enable = true;
-
   programs.kitty = {
     enable = true;
     font = {
-      name = "Agave";
-      package = pkgs.agave;
-      size = 22;
+      name = "JetBrainsMono Nerd Font Mono";
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      size = 18;
     };
     themeFile = "Monokai_Soda";
     extraConfig = ''
