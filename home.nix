@@ -23,8 +23,8 @@
       name = "JetBrainsMono Nerd Font Mono";
     };
     emoji = {
-      package = pkgs.noto-fonts-emoji;
-      name = "Noto Color Emoji";
+      package = pkgs.noto-fonts-monochrome-emoji;
+      name = "Noto Emoji";
     };
     sizes = {
       terminal = 18;
