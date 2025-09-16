@@ -32,5 +32,7 @@
 
   programs.ssh.startAgent = true;
 
+  programs.dconf.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 }
