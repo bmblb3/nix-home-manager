@@ -7,6 +7,8 @@
     nixCats-nvim.url = "github:bmblb3/nvim_nixcats";
     nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
     osync.url = "github:bmblb3/osync?ref=v0.3.0";
+    stylix.url = "github:nix-community/stylix/release-25.05";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -15,6 +17,7 @@
       home-manager,
       nixCats-nvim,
       osync,
+      stylix,
       ...
     }:
     let
@@ -34,6 +37,7 @@
           modules = [
             ./home.nix
             { home.packages = [ osync.packages.${system}.default ]; }
+            stylix.homeModules.stylix
           ];
           extraSpecialArgs = {
             username = "akucwh";
@@ -42,7 +46,10 @@
         };
         bmblb3 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            stylix.homeModules.stylix
+          ];
           extraSpecialArgs = {
             username = "bmblb3";
             inherit nixCats-nvim;

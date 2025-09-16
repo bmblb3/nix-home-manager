@@ -15,6 +15,22 @@
   ];
   nvim.enable = true;
 
+  stylix.enable = true;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/monokai.yaml";
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      name = "JetBrainsMono Nerd Font Mono";
+    };
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
+    };
+    sizes = {
+      terminal = 18;
+    };
+  };
+
   home.packages = with pkgs; [
     act
     bat
@@ -45,7 +61,6 @@
     lsof
     moreutils
     ncdu
-    nerd-fonts.jetbrains-mono
     nix-output-monitor
     nodejs_22
     p7zip
@@ -132,8 +147,6 @@
   programs.starship = {
     enable = true;
   };
-  home.file.".config/starship.toml".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotconfig/starship.toml";
 
   programs.eza = {
     enable = true;
@@ -232,9 +245,7 @@
     '';
   };
   home.file.".config/kitty/extra.conf".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotconfig/kitty/kitty.conf";
-  home.file.".config/kitty/theme.conf".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotconfig/kitty/theme.conf";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotconfig/kitty.conf";
 
   home.stateVersion = "25.05";
 
