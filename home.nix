@@ -214,6 +214,14 @@
 
     functions = {
       fish_greeting = "";
+      fish_title = ''
+        set -l dir (pwd)
+        if test "$dir" = "$HOME"
+            echo "~"
+        else
+            basename "$dir"
+        end
+      '';
     };
   };
 
