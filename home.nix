@@ -16,7 +16,28 @@
   nvim.enable = true;
 
   stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/monokai.yaml";
+  stylix.base16Scheme = {
+    system = "base16";
+    name = "Monokai";
+    palette = {
+      base00 = "#1a1a1a";
+      base01 = "#2d2d2d";
+      base02 = "#4a4a4a";
+      base03 = "#808080";
+      base04 = "#d6d6d6";
+      base05 = "#e4e4e4";
+      base06 = "#f2f2f2";
+      base07 = "#ffffff";
+      base08 = "#f92672";
+      base09 = "#fd971f";
+      base0A = "#f4bf75";
+      base0B = "#82b414";
+      base0C = "#66d9ef";
+      base0D = "#268bd2";
+      base0E = "#8c54fe";
+      base0F = "#e6db74";
+    };
+  };
   stylix.fonts = {
     monospace = {
       package = pkgs.nerd-fonts.jetbrains-mono;
