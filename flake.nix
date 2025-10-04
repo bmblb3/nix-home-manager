@@ -7,6 +7,7 @@
     nixCats-nvim.url = "github:bmblb3/nvim_nixcats";
     nixCats-nvim.inputs.nixpkgs.follows = "nixpkgs";
     osync.url = "github:bmblb3/osync?ref=v0.3.0";
+    kittylitters.url = "github:bmblb3/kittylitters?ref=latest";
     stylix.url = "github:nix-community/stylix/release-25.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -17,6 +18,7 @@
       home-manager,
       nixCats-nvim,
       osync,
+      kittylitters,
       stylix,
       ...
     }:
@@ -36,7 +38,12 @@
           inherit pkgs;
           modules = [
             ./home.nix
-            { home.packages = [ osync.packages.${system}.default ]; }
+            {
+              home.packages = [
+                osync.packages.${system}.default
+                kittylitters.packages.${system}.default
+              ];
+            }
             stylix.homeModules.stylix
           ];
           extraSpecialArgs = {
