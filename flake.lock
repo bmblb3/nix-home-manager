@@ -220,11 +220,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759691477,
-        "narHash": "sha256-0vWryORncJHIOhp23R0Sj7daCHgnk0IPkTz8huh1K2k=",
+        "lastModified": 1759695406,
+        "narHash": "sha256-UxGUiuhWEb//zKSOXOSJiZ5I9i0x+yjJ10hHStU+nGI=",
         "owner": "bmblb3",
         "repo": "nvim_nixcats",
-        "rev": "8594371aa7497fe2bb4680d2d0517e7410c17d91",
+        "rev": "5f695e576088a5c237b3eecef926d7b66ec80fde",
         "type": "github"
       },
       "original": {
