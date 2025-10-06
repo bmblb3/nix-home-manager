@@ -25,7 +25,7 @@
       base08 = "#f92672";
       base09 = "#fd971f";
       base0A = "#f4bf75";
-      base0B = "#82b414";
+      base0B = "#57BF4A";
       base0C = "#66d9ef";
       base0D = "#268bd2";
       base0E = "#8c54fe";
