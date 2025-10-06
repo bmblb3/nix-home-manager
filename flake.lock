@@ -197,42 +197,6 @@
         "type": "github"
       }
     },
-    "nixCats": {
-      "locked": {
-        "lastModified": 1758545673,
-        "narHash": "sha256-MMcEImF7vHqImzrdRlSFCbzGq0ebi/5eSYwypNGr+AA=",
-        "owner": "BirdeeHub",
-        "repo": "nixCats-nvim",
-        "rev": "91f9a4b4605cc3aed835e180eb58a5bd73236407",
-        "type": "github"
-      },
-      "original": {
-        "owner": "BirdeeHub",
-        "repo": "nixCats-nvim",
-        "type": "github"
-      }
-    },
-    "nixCats-nvim": {
-      "inputs": {
-        "nixCats": "nixCats",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1759695406,
-        "narHash": "sha256-UxGUiuhWEb//zKSOXOSJiZ5I9i0x+yjJ10hHStU+nGI=",
-        "owner": "bmblb3",
-        "repo": "nvim_nixcats",
-        "rev": "5f695e576088a5c237b3eecef926d7b66ec80fde",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bmblb3",
-        "repo": "nvim_nixcats",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1757745802,
@@ -399,7 +363,6 @@
       "inputs": {
         "home-manager": "home-manager",
         "kittylitters": "kittylitters",
-        "nixCats-nvim": "nixCats-nvim",
         "nixpkgs": "nixpkgs_3",
         "osync": "osync",
         "stylix": "stylix"

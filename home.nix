@@ -2,18 +2,12 @@
   config,
   pkgs,
   username,
-  nixCats-nvim,
   ...
 }:
 
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";
-
-  imports = [
-    nixCats-nvim.homeModules.default
-  ];
-  nvim.enable = true;
 
   stylix.enable = true;
   stylix.base16Scheme = {
@@ -265,6 +259,69 @@
         user = "git";
       };
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    extraPackages = with pkgs; [
+      basedpyright
+      bash-language-server
+      clippy
+      djlint
+      docker-language-server
+      fd
+      google-java-format
+      jinja-lsp
+      lua-language-server
+      nil
+      nixfmt-rfc-style
+      prettierd
+      ripgrep
+      ruff
+      rust-analyzer
+      rustfmt
+      shellcheck
+      shellharden
+      shfmt
+      stylua
+      superhtml
+      tailwindcss-language-server
+      typescript-language-server
+      typstyle
+      universal-ctags
+      yaml-language-server
+    ];
+
+    plugins = with pkgs.vimPlugins; [
+      CopilotChat-nvim
+      blink-cmp
+      blink-copilot
+      blink-ripgrep-nvim
+      conform-nvim
+      copilot-lua
+      dial-nvim
+      flash-nvim
+      gitsigns-nvim
+      hardtime-nvim
+      lualine-nvim
+      mini-hipatterns
+      nvim-lspconfig
+      nvim-treesitter.withAllGrammars
+      persistence-nvim
+      snacks-nvim
+      vim-dirdiff
+      which-key-nvim
+    ];
+
+    extraLuaConfig = ''
+    require("config")
+    '';
   };
 
   programs.kitty = {
