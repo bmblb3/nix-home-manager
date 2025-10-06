@@ -126,7 +126,7 @@ snacks.setup({
   indent = { enabled = true },
 })
 
-map("n", "<C-g>", function() snacks.lazygit.open() end, { noremap = true, silent = true, desc = "Open lazygit" })
+map("n", "<C-g>", function() snacks.lazygit.open({ configure = false }) end, { noremap = true, silent = true, desc = "Open lazygit" })
 
 map("n", "<leader>s", function() snacks.scratch() end, { desc = "Toggle [s]cratch" })
 map("n", "<leader>S", function() snacks.scratch.select() end, { desc = "[S]elect scratch buffer" })
