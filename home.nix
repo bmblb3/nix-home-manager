@@ -323,6 +323,8 @@
       require("config")
     '';
   };
+  home.file.".config/nvim/lua/config.lua".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/neovim.lua";
 
   programs.kitty = {
     enable = true;
@@ -331,7 +333,7 @@
     '';
   };
   home.file.".config/kitty/extra.conf".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotconfig/kitty.conf";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/kitty.conf";
 
   home.stateVersion = "25.05";
 
