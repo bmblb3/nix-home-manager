@@ -64,7 +64,6 @@ end
 local wk = require("which-key")
 
 -- pretty
-vim.cmd.colorscheme("vim-monokai-tasty")
 require("lualine").setup({})
 require("hardtime").setup({})
 
