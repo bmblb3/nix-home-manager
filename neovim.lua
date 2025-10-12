@@ -183,6 +183,11 @@ map("n", "<leader>k", vim.diagnostic.open_float, { desc = "Open [f]loating diagn
 map("n", "<leader>h", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle inlay [h]ints" })
 
 --
+require("lint").linters_by_ft = {
+  html = { "djlint" },
+}
+
+--
 require("copilot").setup({
   panel = { enabled = false },
   suggestions = { enabled = false },

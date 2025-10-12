@@ -311,6 +311,7 @@
       hardtime-nvim
       lualine-nvim
       mini-hipatterns
+      nvim-lint
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
       persistence-nvim
