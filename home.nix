@@ -309,7 +309,6 @@
       flash-nvim
       gitsigns-nvim
       hardtime-nvim
-      jinja-vim
       lualine-nvim
       mini-hipatterns
       nvim-lspconfig
