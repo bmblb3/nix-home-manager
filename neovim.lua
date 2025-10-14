@@ -186,6 +186,9 @@ map("n", "<leader>h", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hin
 require("lint").linters_by_ft = {
   html = { "djlint" },
 }
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function() require("lint").try_lint() end,
+})
 
 --
 require("copilot").setup({
@@ -210,7 +213,7 @@ require("conform").setup({
     css = { "prettierd" },
     javascript = { "prettierd" },
     typescript = { "prettierd" },
-    html = { "prettierd", "djlint" },
+    html = { "prettierd" },
     yaml = { "prettierd" },
     sh = { "shellharden", "shfmt", "shellcheck" },
     java = { "google-java-format" },
