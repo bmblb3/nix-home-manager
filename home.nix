@@ -289,6 +289,7 @@
       shellcheck
       shellharden
       shfmt
+      sqruff
       stylua
       superhtml
       tailwindcss-language-server

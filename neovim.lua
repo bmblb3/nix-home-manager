@@ -220,6 +220,7 @@ require("conform").setup({
     nix = { "nixfmt" },
     typst = { "typstyle" },
     rust = { "rustfmt" },
+    sql = { "sqruff" },
   },
   format_on_save = true,
 })
