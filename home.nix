@@ -71,6 +71,7 @@
     gnutar
     imagemagick
     jq
+    lazysql
     libevent
     libtool
     lsof
@@ -90,6 +91,7 @@
     rustc
     (rWrapper.override { packages = [ rPackages.tidyverse ]; })
     sqlite
+    sqlpage
     sshfs
     tealdeer
     typst
