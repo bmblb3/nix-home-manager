@@ -221,6 +221,7 @@ require("conform").setup({
     javascript = { "prettierd" },
     typescript = { "prettierd" },
     html = { "prettierd" },
+    htmldjango = { "prettierd" },
     yaml = { "prettierd" },
     sh = { "shellharden", "shfmt", "shellcheck" },
     java = { "google-java-format" },
