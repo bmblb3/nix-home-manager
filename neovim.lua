@@ -166,13 +166,20 @@ vim.lsp.enable("nil_ls")
 vim.lsp.enable("ruff")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.config("rust_analyzer", {
+  cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
   settings = {
     ["rust-analyzer"] = {
       diagnostics = { enable = false },
       check = { command = "clippy" },
+      lspMux = {
+        version = "1",
+        method = "connect",
+        server = "rust-analyzer",
+      },
     },
   },
 })
+
 vim.lsp.enable("superhtml")
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("ts_ls")
