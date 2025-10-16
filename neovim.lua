@@ -75,6 +75,10 @@ map({ "v", "x" }, "p", '"_dP', { desc = "Keep unammed register when overwriting 
 map({ "n" }, "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 
 --
+map("n", "<C-g>", function()
+  vim.cmd("terminal lazygit")
+  vim.cmd("startinsert")
+end, { noremap = true, silent = true, desc = "Open lazygit" })
 wk.add({ "<leader>g", group = "[g]it stuff" })
 require("gitsigns").setup()
 map({ "n", "o" }, "]g", function() vim.cmd("Gitsigns next_hunk") end, { noremap = true, silent = true, desc = "Next git hunk" })
@@ -126,8 +130,6 @@ snacks.setup({
   quickfile = { enabled = true },
   indent = { enabled = true },
 })
-
-map("n", "<C-g>", function() snacks.lazygit.open({ configure = false }) end, { noremap = true, silent = true, desc = "Open lazygit" })
 
 map("n", "<leader>s", function() snacks.scratch() end, { desc = "Toggle [s]cratch" })
 map("n", "<leader>S", function() snacks.scratch.select() end, { desc = "[S]elect scratch buffer" })
