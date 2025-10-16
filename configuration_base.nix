@@ -23,6 +23,8 @@
     home-manager
   ];
 
+  time.timeZone = "Europe/Stockholm";
+
   environment.variables.EDITOR = "vim";
 
   virtualisation.docker.enable = true;
