@@ -283,7 +283,9 @@
       lua-language-server
       nil
       nixfmt-rfc-style
+      phpactor
       prettierd
+      pretty-php
       ripgrep
       ruff
       rust-analyzer

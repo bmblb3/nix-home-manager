@@ -165,6 +165,7 @@ vim.lsp.config("lua_ls", {
   },
 })
 vim.lsp.enable("nil_ls")
+vim.lsp.enable("phpactor")
 vim.lsp.enable("ruff")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.config("rust_analyzer", {
@@ -217,20 +218,21 @@ map({ "n", "v" }, "<leader>a", function() copilotchat.toggle({ sticky = sticky }
 --
 require("conform").setup({
   formatters_by_ft = {
-    lua = { "stylua" },
-    python = { "ruff_format", "ruff_organize_imports" },
     css = { "prettierd" },
-    javascript = { "prettierd" },
-    typescript = { "prettierd" },
     html = { "prettierd" },
     htmldjango = { "djlint" },
-    yaml = { "prettierd" },
-    sh = { "shellharden", "shfmt", "shellcheck" },
     java = { "google-java-format" },
+    javascript = { "prettierd" },
+    lua = { "stylua" },
     nix = { "nixfmt" },
-    typst = { "typstyle" },
+    php = { "pretty-php" },
+    python = { "ruff_format", "ruff_organize_imports" },
     rust = { "rustfmt" },
+    sh = { "shellharden", "shfmt", "shellcheck" },
     sql = { "sqruff" },
+    typescript = { "prettierd" },
+    typst = { "typstyle" },
+    yaml = { "prettierd" },
   },
   format_on_save = true,
 })
