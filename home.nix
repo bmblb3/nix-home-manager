@@ -117,6 +117,7 @@
       fetch.prune = true;
     };
     delta.enable = true;
+    lfs.enable = true;
   };
 
   programs.gh = {
