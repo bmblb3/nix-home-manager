@@ -226,7 +226,6 @@
 
     shellAbbrs = {
       lg = "lazygit";
-      cdg = "cd $(git rev-parse --show-toplevel)";
       cp = "cp -i";
       mv = "mv -i";
     };
