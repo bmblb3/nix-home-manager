@@ -284,7 +284,6 @@
       dial-nvim
       flash-nvim
       gitsigns-nvim
-      hardtime-nvim
       lualine-nvim
       mini-hipatterns
       nvim-lint
