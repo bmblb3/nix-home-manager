@@ -302,6 +302,8 @@
   };
   home.file.".config/nvim/lua/config.lua".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/neovim.lua";
+  home.file.".config/nvim/lua/queries".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/neovim_queries";
 
   programs.kitty = {
     enable = true;
