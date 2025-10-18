@@ -131,7 +131,21 @@ snacks.setup({
   indent = { enabled = true },
 })
 
-map("n", "<leader>s", function() snacks.scratch() end, { desc = "Toggle [s]cratch" })
+map(
+  "n",
+  "<leader>s",
+  function()
+    snacks.scratch.open({
+      ft = "markdown",
+      filekey = {
+        cwd = vim.fs.root(0, ".git") or true,
+        branch = false,
+        count = false,
+      },
+    })
+  end,
+  { desc = "Toggle [s]cratch" }
+)
 map("n", "<leader>S", function() snacks.scratch.select() end, { desc = "[S]elect scratch buffer" })
 
 --
