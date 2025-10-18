@@ -182,7 +182,7 @@ vim.lsp.config("rust_analyzer", {
     },
   },
 })
-
+vim.api.nvim_set_hl(0, "@lsp.type.string.rust", {})
 vim.lsp.enable("superhtml")
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("ts_ls")
@@ -227,12 +227,19 @@ require("conform").setup({
     nix = { "nixfmt" },
     php = { "pretty-php" },
     python = { "ruff_format", "ruff_organize_imports" },
-    rust = { "rustfmt" },
+    rust = { "rustfmt", "injected" },
     sh = { "shellharden", "shfmt", "shellcheck" },
     sql = { "sqruff" },
     typescript = { "prettierd" },
     typst = { "typstyle" },
     yaml = { "prettierd" },
+  },
+  formatters = {
+    injected = {
+      options = {
+        ignore_errors = false,
+      },
+    },
   },
   format_on_save = true,
 })
