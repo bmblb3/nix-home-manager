@@ -66,7 +66,6 @@ local wk = require("which-key")
 
 -- pretty
 require("lualine").setup({})
-require("hardtime").setup({})
 
 -- general keymaps
 map({ "n", "v", "x" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
