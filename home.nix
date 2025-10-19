@@ -291,6 +291,7 @@
       nvim-treesitter.withAllGrammars
       persistence-nvim
       snacks-nvim
+      todo-comments-nvim
       vim-dirdiff
       which-key-nvim
     ];
