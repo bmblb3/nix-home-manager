@@ -121,6 +121,12 @@ persistence.setup({})
 map("n", "<leader>n", function() persistence.load() end, { desc = "Load sessio[n]" })
 
 --
+local todo = require("todo-comments")
+todo.setup()
+map({ "n" }, "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
+map({ "n" }, "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
+
+--
 local snacks = require("snacks")
 snacks.setup({
   scratch = { enabled = true },
@@ -323,6 +329,7 @@ map("n", "<leader><Space>", function() snacks.picker.smart() end, { desc = "find
 map("n", "<leader>w", function() snacks.picker.buffers() end, { desc = "find files (buffers)" })
 map("n", "<leader>/", function() snacks.picker.grep() end, { desc = "find by grep" })
 map("n", "<leader>e", function() snacks.picker.explorer() end, { desc = "[E]xplorer" })
+map("n", "<leader>t", function() snacks.picker.todo_comments() end, { desc = "[T]odo" })
 map("n", "grd", function() snacks.picker.lsp_definitions() end, { desc = "Goto [d]efinition" })
 map("n", "grD", function() snacks.picker.lsp_declarations() end, { desc = "Goto [D]eclaration" })
 map("n", "grr", function() snacks.picker.lsp_references() end, { desc = "Goto [r]eferences" })
