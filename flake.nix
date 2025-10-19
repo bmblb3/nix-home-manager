@@ -2,6 +2,7 @@
   description = "NixOS home manager configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     osync.url = "github:bmblb3/osync?ref=v0.3.0";
@@ -13,6 +14,7 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       osync,
       kittylitters,
@@ -34,6 +36,19 @@
         akucwh = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            (
+              { pkgs, ... }:
+              {
+                nixpkgs.overlays = [
+                  (final: prev: {
+                    unstable = import nixpkgs-unstable {
+                      system = final.system;
+                      config.allowUnfree = true;
+                    };
+                  })
+                ];
+              }
+            )
             ./home.nix
             {
               home.packages = [
