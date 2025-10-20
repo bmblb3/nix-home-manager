@@ -315,7 +315,11 @@
     '';
   };
   home.file.".config/kitty/extra.conf".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/kitty.conf";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/kitty/extra.conf";
+  home.file.".config/kitty/init.kitty-session".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/kitty/init.kitty-session";
+  home.file.".config/kitty/tab_bar.py".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/kitty/tab_bar.py";
 
   home.stateVersion = "25.05";
 
