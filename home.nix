@@ -304,6 +304,8 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/nvim/lua";
   home.file.".config/nvim/queries".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/nvim/queries";
+  home.file.".config/nvim/ftplugin".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/nvim/ftplugin";
 
   programs.kitty = {
     enable = true;
