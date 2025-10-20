@@ -64,8 +64,25 @@ local map = function(mode, lhs, rhs, opts)
 end
 local wk = require("which-key")
 
--- pretty
-require("lualine").setup({})
+-- lualine
+require("lualine").setup({
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "diff", "diagnostics" },
+    lualine_c = { "lsp_status" },
+    lualine_x = { "searchcount" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
+  },
+  tabline = {
+    lualine_a = {},
+    lualine_b = { "hostname", "branch", { "filename", path = 1 } },
+    lualine_c = {},
+    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_y = { "os.date('%b %d (v%V %a) %H:%M')" },
+    lualine_z = {},
+  },
+})
 
 -- general keymaps
 map({ "n", "v", "x" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
