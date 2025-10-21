@@ -285,6 +285,7 @@
       flash-nvim
       gitsigns-nvim
       lualine-nvim
+      mini-diff
       mini-hipatterns
       nvim-lint
       nvim-lspconfig
