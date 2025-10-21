@@ -15,8 +15,8 @@
     name = "Monokai";
     palette = {
       base00 = "#1a1a1a";
-      base01 = "#303030";
-      base02 = "#444444";
+      base01 = "#1e1e1e";
+      base02 = "#4a4a4a";
       base03 = "#808080";
       base04 = "#d6d6d6";
       base05 = "#e4e4e4";
