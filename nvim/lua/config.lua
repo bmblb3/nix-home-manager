@@ -340,7 +340,7 @@ diff.setup({ view = { style = "sign" } })
 local picker = snacks.picker
 map("n", "<leader>p", function() picker() end, { desc = "list [p]ickers" })
 map("n", "<leader><Space>", function() snacks.picker.smart() end, { desc = "find files (smart)" })
-map("n", "<leader>w", function() snacks.picker.buffers() end, { desc = "find files (buffers)" })
+map("n", "<leader>b", function() snacks.picker.buffers() end, { desc = "find files ([b]uffers)" })
 map("n", "<leader>/", function() snacks.picker.grep() end, { desc = "find by grep" })
 map("n", "<leader>e", function() snacks.picker.explorer() end, { desc = "[E]xplorer" })
 map("n", "<leader>t", function() snacks.picker.todo_comments() end, { desc = "[T]odo" })
@@ -350,6 +350,9 @@ map("n", "grr", function() snacks.picker.lsp_references() end, { desc = "Goto [r
 map("n", "gri", function() snacks.picker.lsp_implementations() end, { desc = "Goto [i]mplementation" })
 map("n", "grt", function() snacks.picker.lsp_type_definitions() end, { desc = "Goto [t]ype Definition" })
 map("n", "grg", function() snacks.picker.diagnostics() end, { desc = "Goto dia[g]nostics list" })
+
+--
+map("n", "d<leader>b", function() snacks.bufdelete.other() end, { desc = "delete other [b]uffers" })
 
 --
 if os.getenv("EXTRA_VIMRC") then vim.cmd("source " .. os.getenv("EXTRA_VIMRC")) end
