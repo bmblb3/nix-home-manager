@@ -283,7 +283,6 @@
       copilot-lua
       dial-nvim
       flash-nvim
-      gitsigns-nvim
       lualine-nvim
       mini-diff
       mini-hipatterns

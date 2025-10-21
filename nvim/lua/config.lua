@@ -95,14 +95,7 @@ map("n", "<C-g>", function()
   vim.cmd("terminal lazygit")
   vim.cmd("startinsert")
 end, { noremap = true, silent = true, desc = "Open lazygit" })
-wk.add({ "<leader>g", group = "[g]it stuff" })
-require("gitsigns").setup()
-map({ "n", "o" }, "]g", function() vim.cmd("Gitsigns next_hunk") end, { noremap = true, silent = true, desc = "Next git hunk" })
-map({ "n", "o" }, "[g", function() vim.cmd("Gitsigns prev_hunk") end, { noremap = true, silent = true, desc = "Prev git hunk" })
-map("n", "<leader>gk", function() vim.cmd("Gitsigns preview_hunk") end, { noremap = true, silent = true, desc = "Preview hunk" })
-map("n", "<leader>gr", function() vim.cmd("Gitsigns reset_hunk") end, { noremap = true, silent = true, desc = "Reset hunk" })
-map("n", "<leader>gs", function() vim.cmd("Gitsigns stage_hunk") end, { noremap = true, silent = true, desc = "Stage/unstage hunk" })
-map("n", "<leader>gc", function()
+map("n", "<leader>c", function()
   if vim.bo.filetype ~= "gitcommit" then return end
   local buf = vim.api.nvim_get_current_buf()
 
@@ -130,7 +123,7 @@ Write commit message for the below changes using the conventional-commits conven
       vim.cmd("CopilotChatClose")
     end,
   })
-end, { desc = "Generate commit message with Copilot", noremap = true, silent = true })
+end, { desc = "Generate [c]ommit message with Copilot", noremap = true, silent = true })
 
 --
 local persistence = require("persistence")
@@ -338,6 +331,10 @@ hipatterns.setup({
     hex_color = hipatterns.gen_highlighter.hex_color(),
   },
 })
+
+--
+local diff = require("mini.diff")
+diff.setup({ view = { style = "sign" } })
 
 --
 local picker = snacks.picker
