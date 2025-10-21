@@ -302,6 +302,8 @@
   };
   home.file.".config/nvim/lua".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/nvim/lua";
+  home.file.".config/nvim/after".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/nvim/after";
   home.file.".config/nvim/queries".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/nvim/queries";
   home.file.".config/nvim/ftplugin".source =
