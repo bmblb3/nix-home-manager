@@ -1,1 +1,2 @@
-launch --title "~" --cwd=~ kittylitters
+new_tab ~
+launch --hold --title "~" --cwd=~ kittylitters
