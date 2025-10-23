@@ -169,6 +169,10 @@
     enable = true;
   };
 
+  programs.lazydocker = {
+    enable = true;
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
