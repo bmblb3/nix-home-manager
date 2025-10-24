@@ -69,6 +69,7 @@
     gnuplot
     gnused
     gnutar
+    hyperfine
     imagemagick
     jq
     lazysql
