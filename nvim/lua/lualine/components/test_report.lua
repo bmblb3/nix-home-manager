@@ -17,6 +17,7 @@ end
 function M:update_status()
   local test_state = vim.b.test_state
   if not test_state or test_state.total == 0 then return "" end
+
   local pool = test_state.total
   local fail = test_state.failing
   local pass = pool - fail
