@@ -7,16 +7,11 @@ local M = lualine_require.require("lualine.component"):extend()
 local default_options = {
   refresh = { refresh_time = 200 },
   symbols = { pool = "󰙨", pass = "✓", fail = "✗" },
+  test_color = { pool = { fg = "#666666" }, pass = { fg = "#00bc11" }, fail = { fg = "#ff5f5f" } },
 }
-
-local function apply_default_colors(opts)
-  local default_colors = { pool = { fg = "#666666" }, pass = { fg = "#00bc11" }, fail = { fg = "#ff5f5f" } }
-  opts.test_color = vim.tbl_deep_extend("keep", opts.test_color or {}, default_colors)
-end
 
 function M:init(options)
   M.super.init(self, options)
-  apply_default_colors(self.options)
   self.options = vim.tbl_deep_extend("keep", self.options or {}, default_options)
 
   self.highlights = {
