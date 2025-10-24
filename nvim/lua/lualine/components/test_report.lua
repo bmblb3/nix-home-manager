@@ -1,40 +1,52 @@
-local M = require("lualine.component"):extend()
+local lualine_require = require("lualine_require")
+local modules = lualine_require.lazy_require({
+  highlight = "lualine.highlight",
+})
+local M = lualine_require.require("lualine.component"):extend()
 
-M.default_config = {
-  icon_pool = "󰙨",
-  icon_pass = "✓",
-  icon_fail = "✗",
-  color_pool = { fg = "#666666" },
-  color_pass = { fg = "#00bc11" },
-  color_fail = { fg = "#ff5f5f" },
+local default_options = {
+  refresh = { refresh_time = 200 },
+  symbols = { pool = "󰙨", pass = "✓", fail = "✗" },
 }
+
+local function apply_default_colors(opts)
+  local default_colors = { pool = { fg = "#666666" }, pass = { fg = "#00bc11" }, fail = { fg = "#ff5f5f" } }
+  opts.test_color = vim.tbl_deep_extend("keep", opts.test_color or {}, default_colors)
+end
 
 function M:init(options)
   M.super.init(self, options)
-  self.options = vim.tbl_deep_extend("force", M.default_config, options or {})
+  apply_default_colors(self.options)
+  self.options = vim.tbl_deep_extend("keep", self.options or {}, default_options)
+
+  self.highlights = {
+    pool = self:create_hl(self.options.test_color.pool, "pool"),
+    pass = self:create_hl(self.options.test_color.pass, "pass"),
+    fail = self:create_hl(self.options.test_color.fail, "fail"),
+  }
 end
 
 function M:update_status()
-  local test_state = vim.b.test_state
-  if not test_state or test_state.total == 0 then return "" end
+  local get_test_status = vim.b.get_test_status
+  if not get_test_status or type(get_test_status) ~= "function" then return "" end
 
-  local pool = test_state.total
-  local fail = test_state.failing
-  local pass = pool - fail
+  local status = get_test_status()
+  if not status or not status.pool or not status.fail then return "" end
 
-  local parts = {}
-  local h = require("lualine.highlight")
+  if status.pool == 0 then return "" end
 
-  local hl_pool = h.create_component_highlight_group(self.options.color_pool, "test_pool", self.options)
-  local hl_pass = h.create_component_highlight_group(self.options.color_pass, "test_pass", self.options)
-  local hl_fail = h.create_component_highlight_group(self.options.color_fail, "test_fail", self.options)
+  local colors = {}
+  for name, highlight_name in pairs(self.highlights) do
+    colors[name] = self:format_hl(highlight_name)
+  end
 
-  table.insert(parts, h.component_format_highlight(hl_pool) .. self.options.icon_pool .. "" .. pool .. ":")
-  table.insert(parts, h.component_format_highlight(hl_pass) .. self.options.icon_pass .. "" .. pass)
-  table.insert(parts, h.component_format_highlight(hl_pool) .. "|")
-  table.insert(parts, h.component_format_highlight(hl_fail) .. self.options.icon_fail .. "" .. fail)
+  local result = {}
+  table.insert(result, colors.pool .. self.options.symbols.pool .. status.pool .. ":")
+  table.insert(result, colors.pass .. self.options.symbols.pass .. status.pass)
+  table.insert(result, colors.pool .. "|")
+  table.insert(result, colors.fail .. self.options.symbols.fail .. status.fail)
 
-  return table.concat(parts, "")
+  return table.concat(result, "")
 end
 
 return M
