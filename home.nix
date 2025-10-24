@@ -16,7 +16,7 @@
     palette = {
       base00 = "#1a1a1a";
       base01 = "#1e1e1e";
-      base02 = "#4a4a4a";
+      base02 = "#282828";
       base03 = "#808080";
       base04 = "#d6d6d6";
       base05 = "#e4e4e4";
