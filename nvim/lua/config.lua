@@ -68,7 +68,14 @@ local wk = require("which-key")
 require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "diff", "diagnostics" },
+    lualine_b = {
+      "diff",
+      "diagnostics",
+      {
+        require("lualine.components.test_report"),
+        cond = function() return vim.b.test_state and vim.b.test_state.total > 0 end,
+      },
+    },
     lualine_c = { "lsp_status" },
     lualine_x = { "searchcount" },
     lualine_y = { "progress" },
