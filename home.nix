@@ -98,8 +98,8 @@
     unzip
     watchexec
     wget
-    xsel
     xq-xml
+    xsel
     xz
     yq-go
     zig
