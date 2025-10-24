@@ -13,9 +13,9 @@ function M:init(options)
   self.options = vim.tbl_deep_extend("keep", self.options or {}, default_options)
 
   self.highlights = {
-    pool = self:create_hl(self.options.test_color.pool, "pool"),
-    pass = self:create_hl(self.options.test_color.pass, "pass"),
-    fail = self:create_hl(self.options.test_color.fail, "fail"),
+    pool = self:create_hl(self.options.test_color.pool, "mylualine_test_pool"),
+    pass = self:create_hl(self.options.test_color.pass, "mylualine_test_pass"),
+    fail = self:create_hl(self.options.test_color.fail, "mylualine_test_fail"),
   }
 end
 

@@ -1,4 +1,22 @@
-local M = require("lualine.component"):extend()
+local lualine_require = require("lualine_require")
+local modules = lualine_require.lazy_require({ highlight = "lualine.highlight" })
+local M = lualine_require.require("lualine.component"):extend()
+
+local default_options = {
+  refresh = { refresh_time = 200 },
+  git_color = { branch = { fg = "#ffffff" }, status = { fg = "#ff5f5f" } },
+  branch_symbol = " ",
+}
+
+function M:init(options)
+  M.super.init(self, options)
+  self.options = vim.tbl_deep_extend("keep", self.options or {}, default_options)
+
+  self.highlights = {
+    branch = self:create_hl(self.options.git_color.branch, "mylualine_git_branch"),
+    status = self:create_hl(self.options.git_color.status, "mylualine_git_status"),
+  }
+end
 
 local starship_config = [[
 [git_branch]
@@ -30,30 +48,22 @@ EOF
   return result
 end
 
-M.default_config = {
-  color_branch = { fg = "#ffffff" },
-  color_status = { fg = "#ff5f5f" },
-  refresh_time = 16,
-}
-
-function M:init(options)
-  M.super.init(self, options)
-  self.options = vim.tbl_deep_extend("force", M.default_config, options or {})
-end
-
 function M:update_status()
+  local colors = {}
+  for name, highlight_name in pairs(self.highlights) do
+    colors[name] = self:format_hl(highlight_name)
+  end
+
+  local result = {}
+
   local git_branch = run_starship_module("git_branch")
+  if git_branch == "" then return "" end
+  table.insert(result, colors.branch .. self.options.branch_symbol .. git_branch)
+
   local git_status = run_starship_module("git_status")
+  table.insert(result, colors.status .. git_status)
 
-  local parts = {}
-  local h = require("lualine.highlight")
-
-  local hl_git_branch = h.create_component_highlight_group(self.options.color_branch, "git_branch", self.options)
-  local hl_git_status = h.create_component_highlight_group(self.options.color_status, "git_status", self.options)
-
-  table.insert(parts, h.component_format_highlight(hl_git_branch) .. " " .. git_branch)
-  table.insert(parts, h.component_format_highlight(hl_git_status) .. git_status)
-  return table.concat(parts, " ")
+  return table.concat(result, " ")
 end
 
 return M
