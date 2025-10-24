@@ -69,7 +69,7 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
-      "diff",
+      { "diff", icon = "" },
       "diagnostics",
       {
         require("lualine.components.test_report"),
