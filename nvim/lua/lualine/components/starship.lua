@@ -31,7 +31,7 @@ EOF
 end
 
 M.default_config = {
-  color_branch = { fg = "#3377cc" },
+  color_branch = { fg = "#ffffff" },
   color_status = { fg = "#ff5f5f" },
   refresh_time = 16,
 }
