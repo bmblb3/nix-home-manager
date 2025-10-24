@@ -5,7 +5,7 @@ local starship_config = [[
 format = '$branch'
 
 [git_status]
-format = '\[$all_status$ahead_behind\]'
+format = '$all_status$ahead_behind'
 ]]
 
 local function run_starship_module(module_name)
