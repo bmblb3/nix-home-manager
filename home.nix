@@ -82,6 +82,7 @@
     nodejs_22
     p7zip
     pandoc
+    php
     postgresql
     pre-commit
     python312Full
