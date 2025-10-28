@@ -92,6 +92,7 @@
     rsync
     rustc
     (rWrapper.override { packages = [ rPackages.tidyverse ]; })
+    sqldiff
     sqlite
     sqlpage
     sshfs
