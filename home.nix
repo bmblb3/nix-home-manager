@@ -71,6 +71,7 @@
     gnutar
     hyperfine
     imagemagick
+    inkscape
     jq
     lazysql
     libevent
@@ -98,6 +99,7 @@
     sshfs
     tealdeer
     typst
+    unstable.potrace
     unzip
     watchexec
     wget
