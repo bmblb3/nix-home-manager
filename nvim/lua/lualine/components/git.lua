@@ -1,38 +1,26 @@
 local lualine_require = require("lualine_require")
-local modules = lualine_require.lazy_require({ highlight = "lualine.highlight" })
 local M = lualine_require.require("lualine.component"):extend()
 
-local default_options = {
-  refresh = { refresh_time = 200 },
-}
+local default_options = {}
 
 function M:init(options)
   M.super.init(self, options)
   self.options = vim.tbl_deep_extend("keep", self.options or {}, default_options)
 end
 
-local function run_starship_module(module_name)
-  local cmd = string.format("starship module %s", module_name)
-  local handle = io.popen(cmd .. " 2>/dev/null")
-  if not handle then return "" end
-  local result = handle:read("*a")
-  handle:close()
-  result = result:gsub("\n$", "")
-  result = result:gsub("\27%[[0-9;]*m", "")
-  return result
-end
-
+local cache, last_update = "", 0
 function M:update_status()
-  local result = {}
+  if os.time() - last_update < 1 then return cache end
+  last_update = os.time()
 
-  local git_branch = run_starship_module("git_branch")
-  if git_branch == "" then return "" end
-  table.insert(result, git_branch)
+  local function get_output(module)
+    local result = vim.system({ "starship", "module", module }, { text = true }):wait()
+    return (result.code == 0) and result.stdout:gsub("\27%[[0-9;]*m", ""):gsub("\n$", "") or ""
+  end
 
-  local git_status = run_starship_module("git_status")
-  table.insert(result, git_status)
-
-  return table.concat(result)
+  local branch, status = get_output("git_branch"), get_output("git_status")
+  cache = (branch ~= "" and status ~= "") and (branch .. " " .. status) or ""
+  return cache
 end
 
 return M
