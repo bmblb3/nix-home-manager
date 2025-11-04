@@ -139,6 +139,13 @@
 
   programs.starship = {
     enable = true;
+    enableZshIntegration = true;
+    settings = config.lib.mkMerge [
+      (builtins.fromTOML (
+        builtins.readFile "${pkgs.starship}/share/starship/presets/nerd-font-symbols.toml"
+      ))
+    ];
+
   };
 
   programs.eza = {
