@@ -79,7 +79,7 @@ require("lualine").setup({
     lualine_a = {},
     lualine_b = {
       { "hostname", icon = "󰇄" },
-      require("lualine.components.starship"),
+      require("lualine.components.git"),
       { "filename", path = 1, icon = "" },
     },
     lualine_c = {},
