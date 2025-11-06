@@ -118,28 +118,18 @@
     ];
   };
 
-  programs.fish = {
+  programs.bash = {
     enable = true;
 
-    interactiveShellInit = "set -g fish_key_bindings fish_vi_key_bindings";
-
-    shellAbbrs = {
+    shellAliases = {
       lg = "lazygit";
       cp = "cp -i";
       mv = "mv -i";
     };
 
-    functions = {
-      fish_greeting = "";
-      fish_title = ''
-        set -l dir (pwd)
-        if test "$dir" = "$HOME"
-            echo "~"
-        else
-            basename "$dir"
-        end
-      '';
-    };
+    bashrcExtra = ''
+      set -o vi
+    '';
   };
 
   home.file.".local/bin".source =
