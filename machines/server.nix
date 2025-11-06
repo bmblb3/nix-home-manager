@@ -48,6 +48,7 @@
   };
 
   home.packages = with pkgs; [
+    act
     bat
     btop
     cargo
