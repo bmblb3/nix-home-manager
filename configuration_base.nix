@@ -29,9 +29,6 @@
 
   virtualisation.docker.enable = true;
 
-  users.defaultUserShell = pkgs.fish;
-  programs.fish.enable = true;
-
   programs.ssh.startAgent = true;
 
   programs.dconf.enable = true;

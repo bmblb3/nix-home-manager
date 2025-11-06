@@ -26,6 +26,8 @@
   ];
 
   # -- Custom config starts here -- #
+  users.defaultUserShell = pkgs.fish;
+  programs.fish.enable = true;
 
   wsl = {
     enable = true;
