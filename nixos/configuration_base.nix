@@ -1,0 +1,37 @@
+# Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+{
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    wget
+    curl
+    home-manager
+  ];
+
+  time.timeZone = "Europe/Stockholm";
+
+  environment.variables.EDITOR = "vim";
+
+  virtualisation.docker.enable = true;
+
+  programs.ssh.startAgent = true;
+
+  programs.dconf.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
+}
