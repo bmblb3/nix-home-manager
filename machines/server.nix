@@ -159,6 +159,10 @@
     vimdiffAlias = true;
   };
 
+  programs.rclone = {
+    enable = true;
+  };
+
   home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
