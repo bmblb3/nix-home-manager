@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import re
+import subprocess
+import sys
+
+
+def fmt_table(text: str, sep: str, output_sep: str) -> str:
+    proc = subprocess.run(
+        ["column", "-t", f"-s{sep}", f"-o{output_sep}"],
+        input=text,
+        text=True,
+        capture_output=True,
+    )
+    return proc.stdout
+
+
+text = sys.stdin.read()
+
+text = re.sub(r"\| *", "| ", text)  # force add a space before every |
+text = re.sub(r" *\|", " |", text)  # force add a space after every |
+text = re.sub(r" +", " ", text)  # squeeze spaces
+if len(text.splitlines()) > 1:
+    lines = text.splitlines()
+    lines[1] = re.sub(r"-+", "-", lines[1])
+    text = "\n".join(lines)  # squeeze hyphens on line 2
+
+text = fmt_table(text, "|", "|")
+
+text = re.sub(r" +$", "", text, flags=re.MULTILINE)  # remove any trailing space
+text = re.sub(r"^ +", "", text, flags=re.MULTILINE)  # remove any leading space
+if len(text.splitlines()) > 1:
+    lines = text.splitlines()
+    lines[1] = re.sub(r" ", "-", lines[1])
+    text = "\n".join(lines)  # Replace spaces with - on line 2
+
+print(text, end="")
