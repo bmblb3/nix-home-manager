@@ -70,47 +70,5 @@
         akucwh-dev = mkHomeConfig "akucwh" "dev";
         bmblb3-server = mkHomeConfig "bmblb3" "server";
       };
-
-      # homeConfigurations = {
-      #   akucwh = home-manager.lib.homeManagerConfiguration {
-      #     inherit pkgs;
-      #     modules = [
-      #       (
-      #         { pkgs, ... }:
-      #         {
-      #           nixpkgs.overlays = [
-      #             (final: prev: {
-      #               unstable = import nixpkgs-unstable {
-      #                 system = final.system;
-      #                 config.allowUnfree = true;
-      #               };
-      #             })
-      #           ];
-      #         }
-      #       )
-      #       ./home.nix
-      #       {
-      #         home.packages = [
-      #           osync.packages.${system}.default
-      #           kittylitters.packages.${system}.default
-      #         ];
-      #       }
-      #       stylix.homeModules.stylix
-      #     ];
-      #     extraSpecialArgs = {
-      #       username = "akucwh";
-      #     };
-      #   };
-      #   bmblb3 = home-manager.lib.homeManagerConfiguration {
-      #     inherit pkgs;
-      #     modules = [
-      #       ./home.nix
-      #       stylix.homeModules.stylix
-      #     ];
-      #     extraSpecialArgs = {
-      #       username = "bmblb3";
-      #     };
-      #   };
-      # };
     };
 }
