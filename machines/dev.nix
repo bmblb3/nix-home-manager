@@ -348,10 +348,6 @@
   home.file.".config/kitty/tab_bar.py".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/kitty/tab_bar.py";
 
-  programs.vscode = {
-    enable = true;
-  };
-
   home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
