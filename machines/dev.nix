@@ -56,7 +56,7 @@
     clang-tools
     cmake
     cookiecutter
-    copier
+    unstable.copier
     curl
     docker-compose
     dos2unix
