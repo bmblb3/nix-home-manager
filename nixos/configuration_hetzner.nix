@@ -47,6 +47,7 @@
     serviceConfig = {
       Type = "oneshot";
       User = username;
+      WorkingDirectory = "/home/${username}/self_hosted";
       ExecStart = "/home/${username}/self_hosted/backup";
     };
   };
