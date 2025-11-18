@@ -33,7 +33,7 @@
   systemd.timers."shbackup" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "*-*-* 01:00:00";
+      OnCalendar = "*:0/5";
       Persistent = true;
       Unit = "shbackup.service";
     };
@@ -41,13 +41,13 @@
   systemd.services."shbackup" = {
     path = with pkgs; [
       bash
-      (python3.withPackages (ps: [ ps.python-dotenv ]))
-      gnutar
       restic
+      rclone
     ];
     serviceConfig = {
       Type = "oneshot";
       User = username;
+      WorkingDirectory = "/home/${username}/self_hosted";
       ExecStart = "/home/${username}/self_hosted/backup";
     };
   };
