@@ -56,7 +56,7 @@
     clang-tools
     cmake
     cookiecutter
-    unstable.copier
+    copier
     curl
     docker-compose
     dos2unix
@@ -89,7 +89,7 @@
     php
     postgresql
     pre-commit
-    python312Full
+    python312
     quarto
     ripgrep-all
     rmlint
@@ -102,7 +102,7 @@
     sshfs
     tealdeer
     typst
-    unstable.potrace
+    potrace
     unzip
     watchexec
     wget
@@ -117,15 +117,19 @@
 
   programs.git = {
     enable = true;
-    userName = "Akshay Kumar";
-    userEmail = "132216831+bmblb3@users.noreply.github.com";
-    extraConfig = {
+    settings = {
+      user.email = "132216831+bmblb3@users.noreply.github.com";
+      user.name = "Akshay Kumar";
       credential.helper = "store";
       init.defaultBranch = "main";
       fetch.prune = true;
     };
-    delta.enable = true;
     lfs.enable = true;
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   programs.gh = {
@@ -184,10 +188,12 @@
     enable = true;
     settings = {
       gui.nerdFontsVersion = "3";
-      git.paging = {
-        colorArg = "always";
-        pager = "delta --dark --paging=never";
-      };
+      git.pagers = [
+        {
+          pager = "delta --dark --paging=never";
+          colorArg = "always";
+        }
+      ];
     };
   };
 
@@ -250,8 +256,20 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "12h";
+    enableDefaultConfig = false;
     matchBlocks = {
+      "*" = {
+        forwardAgent = false;
+        addKeysToAgent = "12h";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+      };
       "github.com" = {
         hostname = "ssh.github.com";
         port = 443;
@@ -337,7 +355,6 @@
 
   programs.kitty = {
     enable = true;
-    package = pkgs.unstable.kitty;
     extraConfig = ''
       include extra.conf
     '';
