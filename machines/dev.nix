@@ -278,6 +278,8 @@
     };
   };
 
+  programs.codex.enable = true;
+
   programs.neovim = {
     enable = true;
 
