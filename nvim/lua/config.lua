@@ -263,7 +263,6 @@ require("conform").setup({
     python = { "ruff_format", "ruff_organize_imports" },
     rust = { "rustfmt", "injected" },
     sh = { "shellharden", "shfmt", "shellcheck" },
-    sql = { "sqruff" },
     typescript = { "prettierd" },
     typst = { "typstyle" },
     yaml = { "prettierd" },
