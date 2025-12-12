@@ -88,6 +88,7 @@
     pandoc
     php
     postgresql
+    potrace
     pre-commit
     python312
     quarto
@@ -100,9 +101,10 @@
     sqlite
     sqlpage
     sshfs
+    tasksh
+    taskwarrior-tui
     tealdeer
     typst
-    potrace
     unzip
     watchexec
     wget
@@ -279,6 +281,11 @@
   };
 
   programs.codex.enable = true;
+
+  programs.taskwarrior = {
+    enable = true;
+    package = pkgs.taskwarrior3;
+  };
 
   programs.neovim = {
     enable = true;
