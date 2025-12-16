@@ -23,7 +23,8 @@ vim.b.get_test_status = function()
   local errors = content:match('<testsuites[^>]*errors="(%d+)"')
 
   local pool = tonumber(tests) or 0
-  local pass = (tonumber(failures) or 0) + (tonumber(errors) or 0)
+  local fail = (tonumber(failures) or 0) + (tonumber(errors) or 0)
+  local pass = pool - fail
 
-  return { pool = pool, pass = pass, fail = pool - pass }
+  return { pool = pool, pass = pass, fail = fail }
 end
