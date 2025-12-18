@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v ffmpeg >/dev/null 2>&1; then
+  echo "mk_movie requires ffmpeg to be installed" >&2
+  exit 1
+fi
+
+prompt_with_default() {
+  local prompt="$1" default="$2" response=""
+  if [ -r /dev/tty ]; then
+    read -r -p "$prompt" response </dev/tty
+  else
+    printf '%s (default %s)\n' "$prompt" "$default" >&2
+  fi
+  printf '%s' "${response:-$default}"
+}
+
+images=()
+while IFS= read -r image; do
+  [[ -z "$image" ]] && continue
+  images+=("$image")
+done
+
+if [[ ${#images[@]} -eq 0 ]]; then
+  echo "No image files were supplied to mk_movie." >&2
+  exit 1
+fi
+
+fps=$(prompt_with_default "Frame rate (frames/sec) [30]: " 30)
+resolution=$(prompt_with_default "Resolution (WIDTHxHEIGHT or auto) [auto]: " auto)
+output=$(prompt_with_default "Output filename [movie.mp4]: " movie.mp4)
+
+filter_args=()
+if [[ "$resolution" != "auto" ]]; then
+  filter_args=(-vf "scale=$resolution")
+fi
+
+tmp_list=$(mktemp /tmp/mk_movie.XXXXXX)
+trap 'rm -f "$tmp_list"' EXIT
+for img in "${images[@]}"; do
+  printf 'file %s\n' "$img" >> "$tmp_list"
+done
+
+ffmpeg -y -framerate "$fps" -f concat -safe 0 -i "$tmp_list" \
+  -c:v libx264 -pix_fmt yuv420p "${filter_args[@]}" -r "$fps" "$output"
