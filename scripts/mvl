@@ -14,16 +14,24 @@ dest=$2
 src_abs=$(realpath -- "$src")
 
 links=()
+suffixes=()
 while IFS= read -r -d '' link; do
   target=$(realpath -- "$link" 2>/dev/null) || continue
-  [ "$target" = "$src_abs" ] && links+=("$link")
+  if [ "$target" = "$src_abs" ] || [[ "$target" == "$src_abs/"* ]]; then
+    suffix=${target#$src_abs}
+    links+=("$link")
+    suffixes+=("$suffix")
+  fi
 done < <(find . -type l -print0)
 
 mv -- "$src" "$dest"
 
 dest_abs=$(realpath -- "$dest")
-for link in "${links[@]}"; do
+for i in "${!links[@]}"; do
+  link=${links[i]}
+  suffix=${suffixes[i]}
   link_dir=$(dirname "$link")
-  rel_target=$(realpath --relative-to="$link_dir" "$dest_abs")
+  new_target_abs="$dest_abs$suffix"
+  rel_target=$(realpath --relative-to="$link_dir" "$new_target_abs")
   ln -snf -- "$rel_target" "$link"
 done
