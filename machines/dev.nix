@@ -280,7 +280,10 @@
     };
   };
 
-  programs.codex.enable = true;
+  programs.codex = {
+    enable = true;
+    package = pkgs.unstable.codex;
+  };
 
   programs.taskwarrior = {
     enable = true;
