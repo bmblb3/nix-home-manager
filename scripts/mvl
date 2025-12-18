@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf 'Usage: %s <source> <destination>\n' "$0" >&2
+  exit 1
+}
+
+[ "$#" -eq 2 ] || usage
+
+src=$1
+dest=$2
+
+src_abs=$(realpath -- "$src")
+
+links=()
+while IFS= read -r -d '' link; do
+  target=$(realpath -- "$link" 2>/dev/null) || continue
+  [ "$target" = "$src_abs" ] && links+=("$link")
+done < <(find . -type l -print0)
+
+mv -- "$src" "$dest"
+
+dest_abs=$(realpath -- "$dest")
+for link in "${links[@]}"; do
+  link_dir=$(dirname "$link")
+  rel_target=$(realpath --relative-to="$link_dir" "$dest_abs")
+  ln -snf -- "$rel_target" "$link"
+done
