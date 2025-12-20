@@ -9,3 +9,5 @@ nix profile wipe-history
 nix profile wipe-history --profile ~/.local/state/nix/profiles/home-manager
 nix-collect-garbage --delete-old
 nix store optimise
+
+docker system prune -a -f --volumes

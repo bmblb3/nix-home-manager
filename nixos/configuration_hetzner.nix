@@ -30,6 +30,7 @@
     settings.X11Forwarding = true;
   };
 
+  # backup data every 5 minutes
   systemd.timers."shbackup" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -51,6 +52,49 @@
       ExecStart = "/home/${username}/self_hosted/backup";
     };
   };
+
+  # reboot everynight
+  systemd.timers."nightly-reboot" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 02:30:00";
+      Persistent = true;
+      Unit = "nightly-reboot.service";
+    };
+  };
+  systemd.services."nightly-reboot" = {
+    description = "Nightly reboot at 02:30";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      ExecStart = "${pkgs.systemd}/bin/systemctl reboot";
+    };
+  };
+
+  # run janitor
+  systemd.timers."nightly-janitor" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 03:00:00";
+      Persistent = true;
+      Unit = "nightly-janitor.service";
+    };
+  };
+  systemd.services."nightly-janitor" = {
+    description = "Run janitor nightly at 03:00";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      ExecStart = "${pkgs.bash}/bin/bash -lc '/home/${username}/.local/bin/janitor'";
+    };
+  };
+
+  services.journald.extraConfig = ''
+    SystemKeepFree=5G
+    SystemMaxUse=200M
+    SystemMaxFileSize=50M
+    RuntimeMaxUse=100M
+  '';
 
   networking.hostName = hostname;
 }
