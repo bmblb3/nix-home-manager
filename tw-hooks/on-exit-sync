@@ -5,7 +5,17 @@ import sys
 from sync_hooks import maybe_run_sync, parse_state_dir
 
 
+def stdin_has_changes() -> bool:
+    """Drain stdin and report whether Taskwarrior sent any modified tasks."""
+    has_input = False
+    for _ in sys.stdin:
+        has_input = True
+    return has_input
+
+
 def main() -> int:
+    if not stdin_has_changes():
+        return 0
     try:
         state_dir = parse_state_dir(sys.argv)
     except ValueError as error:
@@ -13,8 +23,8 @@ def main() -> int:
         return 1
     return maybe_run_sync(
         state_dir=state_dir,
-        filestamp_name=".last-on-launch-sync",
-        lock_name=".on-launch-sync.lock",
+        filestamp_name=".last-on-exit-sync",
+        lock_name=".on-exit-sync.lock",
     )
 
 
