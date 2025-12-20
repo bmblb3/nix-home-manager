@@ -252,6 +252,9 @@
   home.file.".local/bin".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/scripts";
 
+  home.file.".local/share/task/hooks".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/tw-hooks";
+
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
