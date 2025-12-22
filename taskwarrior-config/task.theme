@@ -1,0 +1,69 @@
+rule.precedence.color=deleted,completed,active,keyword.,tag.,uda.,project.,scheduled,overdue,due.today,due,blocked,blocking,recurring,tagged,pri.
+
+# basics
+color.active=bold yellow
+color.completed=rgb010 on white
+color.deleted=rgb100 on white
+color.due.today=on rgb020
+color.due=on rgb010
+color.overdue=on rgb100
+color.blocking=rgb522
+color.blocked=rgb235
+color.recurring=
+color.scheduled=on rgb001
+color.tagged=
+color.pri.H=bold white
+color.pri.M=gray23
+color.pri.L=gray12
+color.pri.none=gray23
+
+# missing attributes
+color.project.none=
+color.tag.none=
+color.pri.none=
+
+# personal color rules (replace "X" with your value)
+color.keyword.X=
+color.project.X=
+color.tag.next=rgb440
+color.uda.X=
+
+# interface
+color.alternate=on gray1
+color.header=color0 on gray11
+color.label=gray0 on gray15
+color.label.sort=gray2 on gray21
+color.footnote=on gray6
+
+# burndown report
+color.burndown.pending=rgb000 on rgb010 
+color.burndown.started=rgb000 on bright yellow
+color.burndown.done=rgb000 on rgb020
+
+# calendar
+color.calendar.holiday=cyan
+color.calendar.today=bold yellow
+color.calendar.due.today=on rgb020
+color.calendar.due=on rgb010
+color.calendar.overdue=on rgb100
+color.calendar.weekend=on gray4
+color.calendar.weeknumber=gray8
+
+# history report
+color.history.add=gray14 on rgb010
+color.history.done=black on rgb020
+color.history.delete=gray14 on rgb100
+
+# summary report (background color only)
+color.summary.bar=on rgb010
+color.summary.background=on black
+
+# status
+color.error=red on white
+color.debug=black on white
+color.undo.before=yellow
+color.undo.after=green
+color.sync.added=green
+color.sync.changed=yellow
+color.sync.rejected=red
+color.warning=bold red
