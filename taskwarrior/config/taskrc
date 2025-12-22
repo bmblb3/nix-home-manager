@@ -1,3 +1,4 @@
+hooks.location=~/.config/task/hooks
 include ~/.SECRETS/taskwarrior
 include ./task.theme
 search.case.sensitive=0

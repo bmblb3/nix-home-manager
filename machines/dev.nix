@@ -289,10 +289,10 @@
     enable = true;
     package = pkgs.taskwarrior3;
   };
-  home.file.".local/share/task/hooks".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/taskwarrior-hooks";
+  home.file.".config/task/hooks".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/taskwarrior/hooks";
   home.file.".config/task/config".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/taskwarrior-config";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/taskwarrior/config";
 
   programs.neovim = {
     enable = true;
