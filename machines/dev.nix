@@ -48,6 +48,7 @@
   };
 
   home.packages = with pkgs; [
+    (rWrapper.override { packages = [ rPackages.tidyverse ]; })
     bat
     btop
     cargo
@@ -86,6 +87,7 @@
     osync
     p7zip
     pandoc
+    paraview
     php
     postgresql
     potrace
@@ -96,7 +98,6 @@
     rmlint
     rsync
     rustc
-    (rWrapper.override { packages = [ rPackages.tidyverse ]; })
     sqldiff
     sqlite
     sqlpage

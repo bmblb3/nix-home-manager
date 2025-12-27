@@ -1,3 +1,4 @@
 include ~/.SECRETS/taskwarrior
 include ./task.theme
+data.location=~/.local/share/task
 search.case.sensitive=0
