@@ -27,7 +27,12 @@
 
   services.openssh = {
     enable = true;
-    settings.X11Forwarding = true;
+    ports = [ 15168 ];
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
 
   # backup data every 5 minutes
@@ -97,4 +102,12 @@
   '';
 
   networking.hostName = hostname;
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 15168 ];
+    allowedUDPPorts = [ ];
+    logRefusedConnections = true;
+  };
+
 }
